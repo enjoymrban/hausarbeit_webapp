@@ -1,0 +1,29 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# An example controller showing a sample home page
+GET     /                           controllers.HomeController.index
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+
+#Categories
+GET     /api/category              controllers.CategoryController.category(q: String ?=null)
+POST    /api/category              controllers.CategoryController.addCategory()
+PUT     /api/category/:id          controllers.CategoryController.updateCategory(id: Long)
+DELETE  /api/category/:id          controllers.CategoryController.deleteCategory(id: Long)
+
+#learning Card Box
+GET     /api/box                   controllers.BoxController.box(q: String ?=null)
+GET     /api/box/:id               controllers.BoxController.getBox(id: Long)
+POST    /api/box                   controllers.BoxController.addBox()
+PUT     /api/box/:id               controllers.BoxController.updateBox(id: Long)
+DELETE  /api/box/:id               controllers.BoxController.deleteBox(id: Long)
+
+#learning Cards
+GET     /api/card                   controllers.CardController.card(q: String ?=null)
+GET     /api/card/:id               controllers.CardController.getCard(id: Long)
+POST    /api/card                   controllers.CardController.addCard()
+PUT     /api/card/:id               controllers.CardController.updateCard(id: Long)
+DELETE  /api/card/:id               controllers.CardController.deleteCard(id: Long)
