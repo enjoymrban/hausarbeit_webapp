@@ -33,6 +33,8 @@ public interface BoxService {
      */
     Box add(final Box box);
 
+    Box get(final Long id);
+
 
 
 
