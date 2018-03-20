@@ -33,4 +33,6 @@ public interface CategoryService {
      */
     Category add(final Category category);
 
+    Category get(final Long id);
+
 }

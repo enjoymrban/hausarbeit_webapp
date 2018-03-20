@@ -6,6 +6,7 @@ public class Card {
     private String answer;
     private int nTries;
     private int nCorrect;
+    private Long categoryId;
 
     public Long getId() {
         return id;
@@ -45,5 +46,13 @@ public class Card {
 
     public void setnCorrect(int nCorrect) {
         this.nCorrect = nCorrect;
+    }
+
+    public Long getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
     }
 }
