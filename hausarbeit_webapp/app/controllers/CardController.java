@@ -1,10 +1,13 @@
 package controllers;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import models.Card;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 import services.DefaultCardService;
+
+
 
 public class CardController extends Controller {
 
@@ -18,27 +21,46 @@ public class CardController extends Controller {
     }
 
     public Result card(String q){
-    return null;
-
+        if(q == null){
+            JsonNode json = Json.toJson(cardService.get());
+            return ok(json);
+        }else {
+            return notFound("Card not found");
+        }
     }
 
     public Result getCard(Long id){
-        return null;
+        Card c = cardService.get(id);
+        if(c==null){
+            return notFound("requested Card not found");
+        }else{
+            return ok(Json.toJson(c));
+        }
     }
 
     public Result addCard(){
-        return null;
+        final JsonNode jsonRequest = request().body().asJson();
+        final Card c = Json.fromJson(jsonRequest, Card.class);
+        cardService.add(c);
 
+        return ok(Json.toJson(c));
     }
 
     public Result updateCard(Long id){
-        return null;
+        final JsonNode jsonRequest = request().body().asJson();
+        final Card c = Json.fromJson(jsonRequest, Card.class);
+        cardService.update(c);
+
+        return ok(Json.toJson(c));
 
     }
 
     public Result deleteCard(Long id){
-        return null;
-
+        if(cardService.delete(id)){
+            return ok("Card with id: "+id+" deleted successfully");
+        }else{
+            return notFound("Not able to delete Card. Card with id: "+id+" not found.");
+        }
     }
 
 

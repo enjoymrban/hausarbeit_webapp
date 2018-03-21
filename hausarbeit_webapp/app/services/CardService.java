@@ -33,4 +33,6 @@ public interface CardService {
      */
     Card add(final Card card);
 
+    Card get(final Long id);
+
 }

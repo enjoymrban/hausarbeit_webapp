@@ -19,11 +19,12 @@ public class CategoryController extends Controller {
     }
 
     public Result category(String q){
-        if(q==null){
+        if(q == null){
             JsonNode json = Json.toJson(categoryService.get());
             return ok(json);
+        }else {
+            return notFound("CategoryList not found");
         }
-        return notFound("CategoryList not found");
 
 
     }
@@ -52,8 +53,6 @@ public class CategoryController extends Controller {
         categoryService.update(cat);
 
         return ok(Json.toJson(cat));
-
-
     }
 
     public Result deleteCategory(Long id){
