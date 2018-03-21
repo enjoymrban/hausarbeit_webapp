@@ -5,6 +5,7 @@ import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 import services.DefaultBoxService;
+import models.Box;
 
 public class BoxController extends Controller {
 
@@ -18,26 +19,49 @@ public class BoxController extends Controller {
     }
 
     public Result box(String q){
-    return null;
+        if(q==null){
+            JsonNode json = Json.toJson(boxService.get());
+            return ok(json);
+        }
+        return notFound("boxList not found");
 
     }
 
     public Result getBox(Long id){
-        return null;
+
+        Box box = boxService.get(id);
+        if(box==null){
+            return notFound("requested box not found");
+        }else{
+            return ok(Json.toJson(box));
+        }
     }
 
     public Result addBox(){
-        return null;
+        final JsonNode jsonRequest = request().body().asJson();
+        final Box box = Json.fromJson(jsonRequest, Box.class);
+        boxService.add(box);
+
+        return ok(Json.toJson(box));
 
     }
 
     public Result updateBox(Long id){
-        return null;
+        final JsonNode jsonRequest = request().body().asJson();
+        final Box box = Json.fromJson(jsonRequest, Box.class);
+        boxService.update(box);
+
+        return ok(Json.toJson(box));
 
     }
 
     public Result deleteBox(Long id){
-        return null;
+        if(boxService.delete(id)){
+            return ok("Box with id: "+id+" deleted successfully");
+        }else{
+            return notFound("Box with id: "+id+" not found");
+        }
+
 
     }
 
