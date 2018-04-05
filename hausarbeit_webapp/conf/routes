@@ -14,7 +14,7 @@ POST    /api/category              controllers.CategoryController.addCategory()
 PUT     /api/category/             controllers.CategoryController.updateCategory()
 DELETE  /api/category/:id          controllers.CategoryController.deleteCategory(id: Long)
 
-#learning Card Box
+#learning  Box
 GET     /api/box                   controllers.BoxController.box(q: String ?=null)
 GET     /api/box/:id               controllers.BoxController.getBox(id: Long)
 POST    /api/box                   controllers.BoxController.addBox()
