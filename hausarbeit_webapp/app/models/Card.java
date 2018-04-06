@@ -1,12 +1,27 @@
 package models;
 
+import javax.persistence.*;
+
+
+@Entity(name="card")
 public class Card {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String question;
     private String answer;
     private int nTries;
     private int nCorrect;
-    private Long categoryId;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
+
+   @ManyToOne
+   @JoinColumn(name = "box_id")
+   private Box box;
+
 
     public Long getId() {
         return id;
@@ -48,11 +63,19 @@ public class Card {
         this.nCorrect = nCorrect;
     }
 
-    public Long getCategoryId() {
-        return categoryId;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCategoryId(Long categoryId) {
-        this.categoryId = categoryId;
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public Box getBox() {
+        return box;
+    }
+
+    public void setBox(Box box) {
+        this.box = box;
     }
 }

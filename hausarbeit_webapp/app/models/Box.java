@@ -1,9 +1,20 @@
 package models;
 
+import javax.persistence.*;
+
+@Entity (name = "box")
 public class Box {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
     private String description;
+
+
+
+    public Box(){}
+
 
     public Long getId() {
         return id;

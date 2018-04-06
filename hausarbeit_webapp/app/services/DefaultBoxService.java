@@ -1,60 +1,49 @@
 package services;
 
 import models.Box;
-import java.util.ArrayList;
-import java.util.List;
+import models.BoxRepository;
+
+import javax.inject.Inject;
+import java.util.stream.Stream;
+import java.util.concurrent.CompletionStage;
 
 
+public class DefaultBoxService implements BoxService {
+    private BoxRepository boxRepository;
 
-public class DefaultBoxService implements BoxService{
-    ArrayList<Box> boxes;
-
-    public DefaultBoxService(){
-        boxes = new ArrayList<Box>();}
+    @Inject
+    public DefaultBoxService(BoxRepository boxRepository) {
+        this.boxRepository = boxRepository;
+    }
 
 
     @Override
-    public List<Box> get() {
+    public CompletionStage<Stream<Box>> get() {
 
-        return boxes;
+        return boxRepository.list();
     }
 
     @Override
-    public boolean delete(Long id) {
+    public CompletionStage<Boolean> delete(Long id) {
 
-        for(Box box : boxes){
-            if(box.getId()==id){
-                boxes.remove(box);
-                return true;
-            }
-        }
-        return false;
+        return boxRepository.remove(id);
     }
 
     @Override
-    public Box update(Box updatedBox) {
-        for(Box box : boxes){
-            if(box.getId()==updatedBox.getId()){
-                boxes.set(boxes.indexOf(box), updatedBox);
-                return updatedBox;
-            }
-        }
-        return null;
+    public CompletionStage<Box> update(Box updatedBox) {
+
+        return boxRepository.update(updatedBox);
     }
 
     @Override
-    public Box add(Box box) {
-        boxes.add(box);
-        return box;
+    public CompletionStage<Box> add(Box box) {
+
+        return boxRepository.add(box);
     }
 
     @Override
-    public Box get(Long id) {
-        for(Box box : boxes){
-            if(box.getId()==id){
-                return box;
-            }
-        }
-        return null;
+    public CompletionStage<Box> get(Long id) {
+
+        return boxRepository.find(id);
     }
 }

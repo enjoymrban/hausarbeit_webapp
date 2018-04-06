@@ -3,64 +3,73 @@ package controllers;
 import com.fasterxml.jackson.databind.JsonNode;
 import models.Category;
 import play.libs.Json;
+import play.libs.concurrent.HttpExecutionContext;
+import play.mvc.BodyParser;
 import play.mvc.Controller;
-import services.DefaultCategoryService;
+
+import services.CategoryService;
+
 import play.mvc.Result;
+
+import javax.inject.Inject;
+import java.util.concurrent.CompletionStage;
+import java.util.stream.Collectors;
+
 
 public class CategoryController extends Controller {
 
-    DefaultCategoryService categoryService;
-    public CategoryController(){
-        categoryService = new DefaultCategoryService();
+    private final CategoryService categoryService;
+    private final HttpExecutionContext ec;
+
+    @Inject
+    public CategoryController(CategoryService categoryService, HttpExecutionContext ec) {
+        this.categoryService = categoryService;
+        this.ec = ec;
     }
 
-    public Result index() {
-        return ok(views.html.index.render());
-    }
 
-    public Result category(String q){
-        if(q == null){
-            JsonNode json = Json.toJson(categoryService.get());
-            return ok(json);
-        }else {
-            return notFound("CategoryList not found");
-        }
+    public CompletionStage<Result> category(String q) {
+        return categoryService.get().thenApplyAsync(personStream -> {
+            return ok(Json.toJson(personStream.collect(Collectors.toList())));
+        }, ec.current());
 
-
-    }
-    public Result getCategory(Long id){
-        Category cat = categoryService.get(id);
-        if(cat==null){
-            return notFound("requested category not found");
-        }else{
-            return ok(Json.toJson(cat));
-        }
 
     }
 
-    public Result addCategory(){
+//    public CompletionStage<Result> getCategory(Long id) {
+//        return categoryService.get(id).thenApplyAsync(category -> {
+//            return ok(Json.toJson(category));
+//        }, ec.current());
+//
+//    }
+
+    @BodyParser.Of(BodyParser.Json.class)
+    public CompletionStage<Result> addCategory() {
         final JsonNode jsonRequest = request().body().asJson();
-        final Category cat = Json.fromJson(jsonRequest, Category.class);
-        categoryService.add(cat);
+        final Category catToAdd = Json.fromJson(jsonRequest, Category.class);
 
-        return ok(Json.toJson(cat));
+        return categoryService.add(catToAdd).thenApplyAsync(category -> {
+            return ok(Json.toJson(category));
+        }, ec.current());
 
     }
 
-    public Result updateCategory(){
+    @BodyParser.Of(BodyParser.Json.class)
+    public CompletionStage<Result> updateCategory(Long id) {
         final JsonNode jsonRequest = request().body().asJson();
-        final Category cat = Json.fromJson(jsonRequest, Category.class);
-        categoryService.update(cat);
+        final Category catToUpdate = Json.fromJson(jsonRequest, Category.class);
 
-        return ok(Json.toJson(cat));
+        catToUpdate.setId(id);
+
+        return categoryService.update(catToUpdate).thenApplyAsync(box -> {
+            return ok(Json.toJson(box));
+        }, ec.current());
     }
 
-    public Result deleteCategory(Long id){
-        if(categoryService.delete(id)){
-            return ok("Category with id: "+id+" deleted successfully");
-        }else{
-            return notFound("Category with id: "+id+" not found");
-        }
+    public CompletionStage<Result> deleteCategory(Long id) {
+        return categoryService.delete(id).thenApplyAsync(removed -> {
+            return removed ? ok() : internalServerError();
+        }, ec.current());
 
     }
 

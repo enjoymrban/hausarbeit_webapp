@@ -1,57 +1,44 @@
 package services;
 
 import models.Card;
+import models.CardRepository;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.inject.Inject;
+import java.util.concurrent.CompletionStage;
+import java.util.stream.Stream;
 
-public class DefaultCardService implements CardService{
-ArrayList<Card> cards;
 
-public DefaultCardService(){
-    cards = new ArrayList<Card>();
-}
+public class DefaultCardService implements CardService {
+    private CardRepository cardRepository;
 
-    @Override
-    public List<Card> get() {
-        return cards;
+
+    @Inject
+    public DefaultCardService(CardRepository cardRepository) {
+        this.cardRepository = cardRepository;
     }
 
     @Override
-    public boolean delete(Long id) {
-        for(Card c : cards){
-            if(c.getId()==id){
-                cards.remove(c);
-                return true;
-            }
-        }
-        return false;
+    public CompletionStage<Stream<Card>> get() {
+        return cardRepository.list();
     }
 
     @Override
-    public Card update(Card updatedCard) {
-        for(Card c : cards){
-            if(c.getId()==updatedCard.getId()){
-                cards.set(cards.indexOf(c), updatedCard);
-                return updatedCard;
-            }
-        }
-        return null;
+    public CompletionStage<Boolean> delete(Long id) {
+        return cardRepository.remove(id);
     }
 
     @Override
-    public Card add(Card c) {
-        cards.add(c);
-        return c;
+    public CompletionStage<Card> update(Card updateCard) {
+        return cardRepository.update(updateCard);
     }
 
     @Override
-    public Card get(Long id) {
-        for(Card c : cards){
-            if(c.getId()==id){
-                return c;
-            }
-        }
-        return null;
+    public CompletionStage<Card> add(Card card) {
+        return cardRepository.add(card);
+    }
+
+    @Override
+    public CompletionStage<Card> get(Long id) {
+        return cardRepository.find(id);
     }
 }

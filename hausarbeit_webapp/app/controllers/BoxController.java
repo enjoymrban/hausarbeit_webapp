@@ -4,68 +4,76 @@ import com.fasterxml.jackson.databind.JsonNode;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
-import services.DefaultBoxService;
+import services.BoxService;
+import play.mvc.BodyParser;
 import models.Box;
+
+import javax.inject.Inject;
+import java.util.concurrent.CompletionStage;
+import java.util.stream.Collectors;
+
+import play.libs.concurrent.HttpExecutionContext;
+
 
 public class BoxController extends Controller {
 
-    DefaultBoxService boxService;
-    public BoxController(){
-        boxService = new DefaultBoxService();
+    private final BoxService boxService;
+    private final HttpExecutionContext ec;
+
+    @Inject
+    public BoxController(BoxService boxService, HttpExecutionContext ec) {
+
+        this.boxService = boxService;
+        this.ec = ec;
     }
 
-    public Result index() {
-        return ok(views.html.index.render());
-    }
 
-    public Result box(String q){
-        if(q==null){
-            JsonNode json = Json.toJson(boxService.get());
-            return ok(json);
-        }
-        return notFound("boxList not found");
+    public CompletionStage<Result> box(String q) {
+        return boxService.get().thenApplyAsync(personStream -> {
+            return ok(Json.toJson(personStream.collect(Collectors.toList())));
+        }, ec.current());
 
     }
 
-    public Result getBox(Long id){
+    public CompletionStage<Result> getBox(Long id) {
 
-        Box box = boxService.get(id);
-        if(box==null){
-            return notFound("requested box not found");
-        }else{
+        return boxService.get(id).thenApplyAsync(box -> {
             return ok(Json.toJson(box));
-        }
+        }, ec.current());
     }
 
-    public Result addBox(){
+    @BodyParser.Of(BodyParser.Json.class)
+    public CompletionStage<Result> addBox() {
         final JsonNode jsonRequest = request().body().asJson();
-        final Box box = Json.fromJson(jsonRequest, Box.class);
-        boxService.add(box);
+        final Box boxToAdd = Json.fromJson(jsonRequest, Box.class);
 
-        return ok(Json.toJson(box));
+        return boxService.add(boxToAdd).thenApplyAsync(box -> {
+            return ok(Json.toJson(box));
+        }, ec.current());
 
     }
 
-    public Result updateBox(Long id){
+    @BodyParser.Of(BodyParser.Json.class)
+    public CompletionStage<Result> updateBox(Long id) {
         final JsonNode jsonRequest = request().body().asJson();
-        final Box box = Json.fromJson(jsonRequest, Box.class);
-        boxService.update(box);
+        final Box boxToUpdate = Json.fromJson(jsonRequest, Box.class);
 
-        return ok(Json.toJson(box));
+        boxToUpdate.setId(id);
 
-    }
-
-    public Result deleteBox(Long id){
-        if(boxService.delete(id)){
-            return ok("Box with id: "+id+" deleted successfully");
-        }else{
-            return notFound("Box with id: "+id+" not found");
-        }
+        return boxService.update(boxToUpdate).thenApplyAsync(box -> {
+            return ok(Json.toJson(box));
+        }, ec.current());
 
 
     }
 
+    public CompletionStage<Result> deleteBox(Long id) {
+        return boxService.delete(id).thenApplyAsync(removed -> {
+            return removed ? ok() : internalServerError();
+        }, ec.current());
 
+
+    }
 
 
 }

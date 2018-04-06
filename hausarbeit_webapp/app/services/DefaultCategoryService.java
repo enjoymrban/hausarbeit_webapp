@@ -1,58 +1,44 @@
 package services;
 
 import models.Category;
+import models.CategoryRepository;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.inject.Inject;
+import java.util.concurrent.CompletionStage;
+import java.util.stream.Stream;
 
-public class DefaultCategoryService implements CategoryService{
-    ArrayList<Category> categories;
 
-    public DefaultCategoryService(){
-        categories = new ArrayList<Category>();
+public class DefaultCategoryService implements CategoryService {
+    private CategoryRepository categoryRepository;
+
+    @Inject
+    public DefaultCategoryService(CategoryRepository categoryRepository) {
+        this.categoryRepository = categoryRepository;
+    }
+
+
+    @Override
+    public CompletionStage<Stream<Category>> get() {
+        return categoryRepository.list();
     }
 
     @Override
-    public List<Category> get() {
-        return categories;
+    public CompletionStage<Boolean> delete(Long id) {
+        return categoryRepository.remove(id);
     }
 
     @Override
-    public boolean delete(Long id) {
-        for(Category cat : categories){
-            if(cat.getId()==id){
-                categories.remove(cat);
-                return true;
-            }
-        }
-        return false;
+    public CompletionStage<Category> update(Category updatedCategory) {
+        return categoryRepository.update(updatedCategory);
     }
 
     @Override
-    public Category update(Category updateCategory) {
-        for(Category cat : categories){
-            if(cat.getId()==updateCategory.getId()){
-                categories.set(categories.indexOf(cat), updateCategory);
-                return updateCategory;
-            }
-        }
-        return null;
+    public CompletionStage<Category> add(Category category) {
+        return categoryRepository.add(category);
     }
 
-    @Override
-    public Category add(Category cat) {
-        categories.add(cat);
-        return cat;
-    }
-
-    @Override
-    public Category get(Long id) {
-        for(Category cat : categories){
-            if(cat.getId()==id){
-                return cat;
-            }
-        }
-        return null;
-    }
-
+//    @Override
+//    public CompletionStage<Category> get(Long id) {
+//        return categoryRepository.find(id);
+//    }
 }

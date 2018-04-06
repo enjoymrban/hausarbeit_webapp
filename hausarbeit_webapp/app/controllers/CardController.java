@@ -3,67 +3,67 @@ package controllers;
 import com.fasterxml.jackson.databind.JsonNode;
 import models.Card;
 import play.libs.Json;
+import play.libs.concurrent.HttpExecutionContext;
+import play.mvc.BodyParser;
 import play.mvc.Controller;
 import play.mvc.Result;
-import services.DefaultCardService;
+import services.CardService;
 
+import javax.inject.Inject;
+import java.util.concurrent.CompletionStage;
+import java.util.stream.Collectors;
 
 
 public class CardController extends Controller {
+    private final CardService cardService;
+    private final HttpExecutionContext ec;
 
-    DefaultCardService cardService;
-    public CardController(){
-        cardService = new DefaultCardService();
+    @Inject
+    public CardController(CardService cardService, HttpExecutionContext ec) {
+        this.cardService = cardService;
+        this.ec = ec;
     }
 
-    public Result index() {
-        return ok(views.html.index.render());
+
+    public CompletionStage<Result> card(String q) {
+        return cardService.get().thenApplyAsync(personStream -> {
+            return ok(Json.toJson(personStream.collect(Collectors.toList())));
+        }, ec.current());
     }
 
-    public Result card(String q){
-        if(q == null){
-            JsonNode json = Json.toJson(cardService.get());
-            return ok(json);
-        }else {
-            return notFound("Card not found");
-        }
+    public CompletionStage<Result> getCard(Long id) {
+        return cardService.get(id).thenApplyAsync(card -> {
+            return ok(Json.toJson(card));
+        }, ec.current());
     }
 
-    public Result getCard(Long id){
-        Card c = cardService.get(id);
-        if(c==null){
-            return notFound("requested Card not found");
-        }else{
-            return ok(Json.toJson(c));
-        }
-    }
-
-    public Result addCard(){
+    @BodyParser.Of(BodyParser.Json.class)
+    public CompletionStage<Result> addCard() {
         final JsonNode jsonRequest = request().body().asJson();
-        final Card c = Json.fromJson(jsonRequest, Card.class);
-        cardService.add(c);
+        final Card cardToAdd = Json.fromJson(jsonRequest, Card.class);
 
-        return ok(Json.toJson(c));
+        return cardService.add(cardToAdd).thenApplyAsync(card -> {
+            return ok(Json.toJson(card));
+        }, ec.current());
     }
 
-    public Result updateCard(Long id){
+    public CompletionStage<Result> updateCard(Long id) {
         final JsonNode jsonRequest = request().body().asJson();
-        final Card c = Json.fromJson(jsonRequest, Card.class);
-        cardService.update(c);
+        final Card cardToUpdate = Json.fromJson(jsonRequest, Card.class);
 
-        return ok(Json.toJson(c));
+        cardToUpdate.setId(id);
+
+        return cardService.update(cardToUpdate).thenApplyAsync(card -> {
+            return ok(Json.toJson(card));
+        }, ec.current());
 
     }
 
-    public Result deleteCard(Long id){
-        if(cardService.delete(id)){
-            return ok("Card with id: "+id+" deleted successfully");
-        }else{
-            return notFound("Not able to delete Card. Card with id: "+id+" not found.");
-        }
+    public CompletionStage<Result> deleteCard(Long id) {
+        return cardService.delete(id).thenApplyAsync(removed -> {
+            return removed ? ok() : internalServerError();
+        }, ec.current());
     }
-
-
 
 
 }
