@@ -18,3 +18,10 @@ libraryDependencies ++= Seq(
   "com.h2database" % "h2" % "1.4.192"
 )
 PlayKeys.externalizeResources := false
+
+libraryDependencies ++= Seq(
+  "org.webjars" % "bootstrap" % "4.0.0",
+  "org.webjars" % "jquery" % "3.2.1",
+  "org.webjars" % "popper.js" % "1.12.9",
+  "org.webjars" % "sammy" % "0.7.4"
+)
