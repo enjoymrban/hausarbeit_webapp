@@ -15,8 +15,12 @@
         <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("lib/bootstrap/css/bootstrap.min.css")">
         <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
+
     </head>
     <body>
+
+        <div id="wrap">
+            <div id="main" class=" clear-top">
 
         <nav class="navbar navbar-expand-lg navbar-light">
             <a class="navbar-brand" href="#">JK Lern App</a>
@@ -40,18 +44,23 @@
 
             </div>
         </nav>
+                <hr>
 
 
         @* And here's where we render the `Html` object containing
          * the page content. *@
         @content
 
+            </div>
+        </div>
+
 
         <footer class="footer">
-            <div class="container">
+            <div class="hallo">
                 <span class="text-muted">
-                    <small>Copyright 2017 &copy;, Silvio J&auml;ger &amp; Silvan Knecht</small>
+                    <small>Copyright 2018 &copy;, Silvio J&auml;ger &amp; Silvan Knecht</small>
                 </span>
+            </div>
             </div>
         </footer>
 
