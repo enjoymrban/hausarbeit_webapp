@@ -3,14 +3,16 @@ var app = $.sammy('#app', function() {
         context.app.swap('');
         learnnow(context);
     });
-    /*this.get('#/books', function(context) {
+    this.get('#/createbox', function(context) {
         context.app.swap('');
-        books(context);
+        createbox(context);
+
+
     });
-    this.get('#/bestseller', function(context) {
-        context.app.swap('');
-        bestseller(context);
-    });*/
+    /* this.get('#/bestseller', function(context) {
+         context.app.swap('');
+         bestseller(context);
+     });*/
 });
 
 
@@ -36,9 +38,15 @@ function learnnow(context) {
 
 
                 });
-                var createCard = $('<div class="col-xl-3 col-md-4 col-sm-6 d-flex align-items-stretch"><div class="card align-items-center"><div class="card-body "><img src="/assets//images/icons/add.svg" alt="addBox"  width="80" height="80" /></div></div></div>')
+                var createCard = $('<a href="#/createbox"><div class="col-xl-3 col-md-4 col-sm-6 d-flex align-items-stretch"><div class="card align-items-center"><div class="card-body "><img src="/assets//images/icons/add.svg" alt="addBox"  width="80" height="80" /></div></div></div></a>')
                 $(".box" ).append(createCard);
 
             });
     });
+}
+
+function createbox(context){
+    context.render('/assets/html/createbox.html', {})
+        .appendTo(context.$element())
+
 }
