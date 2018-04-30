@@ -33,8 +33,9 @@ function learnnow(context) {
             .appendTo(context.$element())
             .then(function () {
                 $.each(json, function(key, value) {
-
-                    var card = $('<div class="col-xl-3 col-md-4 col-sm-6 d-flex align-items-stretch "><div class="card"><div class="card-body"><h4 class="card-title">'+value.title+'</h4><p class="card-text">'+value.description+'</p></div><div class="custom-card-footer"><a href="#/editbox"><img src="/assets//images/icons/settings.svg" alt="editBox"  width="35" height="35" /></a></div></div>')
+                    var id = (value.id).toString();
+                    var editLink = "#/editbox?id="+id;
+                    var card = $('<div class="col-xl-3 col-md-4 col-sm-6 d-flex align-items-stretch "><div class="card"><div class="card-body"><h4 class="card-title">'+value.title+'</h4><p class="card-text">'+value.description+'</p></div><div class="custom-card-footer"><a href=editLink><img src="/assets//images/icons/settings.svg" alt="editBox"  width="35" height="35" /></a></div></div>')
                     $(".box" ).append(card);
 
 
@@ -53,7 +54,7 @@ function createbox(context){
 }
 
 
-function editbox() {
+function editbox(context) {
     context.render('/assets/html/editbox.html', {})
         .appendTo(context.$element())
 
