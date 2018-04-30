@@ -3,16 +3,17 @@ var app = $.sammy('#app', function() {
         context.app.swap('');
         learnnow(context);
     });
+
     this.get('#/createbox', function(context) {
         context.app.swap('');
         createbox(context);
 
 
     });
-    /* this.get('#/bestseller', function(context) {
+     this.get('#/editbox', function(context) {
          context.app.swap('');
-         bestseller(context);
-     });*/
+         editbox(context);
+     });
 });
 
 
@@ -33,12 +34,12 @@ function learnnow(context) {
             .then(function () {
                 $.each(json, function(key, value) {
 
-                    var card = $('<div class="col-xl-3 col-md-4 col-sm-6 d-flex align-items-stretch"><div class="card"><div class="card-body"><h4 class="card-title">'+value.title+'</h4><p class="card-text">'+value.description+'</p><div class="custom-card-footer"><img src="/assets//images/icons/settings.svg" alt="addBox"  width="35" height="35" /></div></div></div>')
+                    var card = $('<div class="col-xl-3 col-md-4 col-sm-6 d-flex align-items-stretch "><div class="card"><div class="card-body"><h4 class="card-title">'+value.title+'</h4><p class="card-text">'+value.description+'</p></div><div class="custom-card-footer"><a href="#/editbox"><img src="/assets//images/icons/settings.svg" alt="editBox"  width="35" height="35" /></a></div></div>')
                     $(".box" ).append(card);
 
 
                 });
-                var createCard = $('<a href="#/createbox"><div class="col-xl-3 col-md-4 col-sm-6 d-flex align-items-stretch"><div class="card align-items-center"><div class="card-body "><img src="/assets//images/icons/add.svg" alt="addBox"  width="80" height="80" /></div></div></div></a>')
+                var createCard = $('<div class="col-xl-3 col-md-4 col-sm-6 d-flex align-items-stretch "><div class="card align-items-center"><a href="#/createbox"><div class="card-body "><img src="/assets//images/icons/add.svg" alt="addBox"  width="80" height="80" /></div></a></div></div>')
                 $(".box" ).append(createCard);
 
             });
@@ -47,6 +48,13 @@ function learnnow(context) {
 
 function createbox(context){
     context.render('/assets/html/createbox.html', {})
+        .appendTo(context.$element())
+
+}
+
+
+function editbox() {
+    context.render('/assets/html/editbox.html', {})
         .appendTo(context.$element())
 
 }

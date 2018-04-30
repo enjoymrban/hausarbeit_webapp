@@ -1,6 +1,8 @@
 html, body {
     height: 100%;
     background-image: linear-gradient(to top, #5ee7df 0%, #b490ca 100%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 
@@ -38,10 +40,14 @@ html, body {
 }
 
 .card {
-    margin-bottom: 2%;
-    min-width: 250px;
 
+    min-width: 250px;
+    margin: 0 auto;
+    float: none;
+    margin-bottom: 10px;
 }
+
+
 
 .card:hover{
 
@@ -53,5 +59,9 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+h1 {
+    text-align: center;
 }
 
