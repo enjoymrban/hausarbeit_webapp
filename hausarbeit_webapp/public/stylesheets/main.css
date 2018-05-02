@@ -1,9 +1,12 @@
 html, body {
     height: 100%;
-    background-image: linear-gradient(to top, #5ee7df 0%, #b490ca 100%);
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    /*background-image: linear-gradient(to top, #5ee7df 0%, #b490ca 100%);*/
+    /*background-repeat: no-repeat;*/
+    /*background-attachment: fixed;*/
+
+    background-image: url("/assets//images/linebackground.png");
 }
+
 
 
 
@@ -29,7 +32,6 @@ html, body {
 .navbar {
     background-color: transparent;
     border-color: black;
-
 }
 
 
@@ -55,12 +57,15 @@ html, body {
     background-color:lightgray;
 }
 
-.createbox {
+.createbox,
+.createcard{
     display: flex;
     align-items: center;
     justify-content: center;
 }
-
+.settingsWheel{
+    margin:3px;
+}
 
 .settingsWheel:hover {
 

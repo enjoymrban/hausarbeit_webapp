@@ -63,7 +63,13 @@ function createBoxPage(context){
 }
 
 function createBox(){
-    alert('jakdkd');
+    $.ajax({
+
+        type: "POST",
+        url: url,
+        dataType: "json",
+        data: data
+    });
 }
 
 function editBoxPage(context, id) {
@@ -93,3 +99,10 @@ function editBoxPage(context, id) {
 
 }
 
+
+function createCardPage(context, id){
+    context.render('/assets/html/createcard.html', {})
+        .appendTo(context.$element())
+
+
+}
