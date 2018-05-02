@@ -54,23 +54,41 @@ function learnnowPage(context) {
 function createBoxPage(context){
     context.render('/assets/html/createbox.html', {})
         .appendTo(context.$element())
-
-    $( document ).ready(function() {
-        $('#test1').click(function(){
-            createBox();
+        .then(function(){
+            $('#createboxbutton').click(function(){
+                createBox();
+            });
         });
-    });
+
 }
 
 function createBox(){
+    var name = $("#boxname").val();
+    var description = $("#boxdescription").val();
+    var postJson = {
+        title:		    name,
+        description:    description
+    };
+
     $.ajax({
 
-        type: "POST",
-        url: url,
-        dataType: "json",
-        data: data
+        type: 'POST',
+        url: '/api/box',
+        data: JSON.stringify(postJson),
+        contentType: "application/json",
+        dataType: 'json',
+        success: function (msg) {
+
+            window.location = '#/learnnow';
+        },
+        error: function (errormessage) {
+            alert("No new box was created!");
+
+        }
     });
+
 }
+
 
 function editBoxPage(context, id) {
 
@@ -99,10 +117,51 @@ function editBoxPage(context, id) {
 
 }
 
-
-function createCardPage(context, id){
+function createCardPage(context, boxid){
     context.render('/assets/html/createcard.html', {})
         .appendTo(context.$element())
+        .then(function(){
+            $('#createcardtitle').html("Karte zu Lernkartei "+boxid+" hinzufügen");
+            $('#createcardbutton').click(function(){
+                createCard(boxid);
+            });
+        });
 
+
+
+
+}
+
+function createCard(boxid){
+    var question = $("#cardquestion").val();
+    var answer = $("#cardanswer").val();
+    var postJson = {
+        question:  question,
+        answer:    answer,
+        nTries:  0,
+        nCorrect: 0,
+        category: {
+            id: 1
+        },
+        box:{
+            id: boxid
+        }
+    };
+
+    $.ajax({
+
+        type: 'POST',
+        url: '/api/card',
+        data: JSON.stringify(postJson),
+        contentType: "application/json",
+        dataType: 'json',
+        success: function (msg) {
+            window.location = '#/editbox/'+boxid;
+        },
+        error: function (errormessage) {
+            alert("No new card was created!");
+
+        }
+    });
 
 }

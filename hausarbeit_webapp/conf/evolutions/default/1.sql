@@ -30,6 +30,12 @@ create table card (
 );
 
 
+INSERT INTO box (title, description) VALUES ('englisch', 'letzte Prüfung');
+INSERT INTO category (title) VALUES ('Englisch');
+#INSERT INTO card ( question, answer, nTries, nCorrect, category_id, box_id) VALUES ('assertiveness','Durchsetzungsvermögen',0,0,1,1);
+  #('debrise','Trümmer',0,0,1,1),
+  #('fuselage','Rumpf',0,0,1,1),('metal fatigue','Metallermüdung',0,0,1,1);
+
 
 
 # --- !Downs

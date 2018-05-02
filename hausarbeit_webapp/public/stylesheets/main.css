@@ -5,6 +5,7 @@ html, body {
     /*background-attachment: fixed;*/
 
     background-image: url("/assets//images/linebackground.png");
+
 }
 
 
@@ -27,6 +28,7 @@ html, body {
     padding-top:20px;
     text-align: center;
     background-color: transparent;
+
 }
 
 .navbar {
@@ -52,17 +54,18 @@ html, body {
 
 
 .card:hover{
-
-
     background-color:lightgray;
 }
 
+/*Form Sections*/
 .createbox,
 .createcard{
     display: flex;
     align-items: center;
     justify-content: center;
 }
+
+/*Edit Box Wheel*/
 .settingsWheel{
     margin:3px;
 }
