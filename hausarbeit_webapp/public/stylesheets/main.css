@@ -61,7 +61,10 @@ body {
 }
 .card-form
 {
-    width: auto!important;
+    width: auto;
+    min-width: 350px;
+    max-width: 550px!important;
+
 }
 .card-box{
     background-color:transparent!important;
@@ -124,6 +127,3 @@ h1 {
 
 
 /*createcard.html*/
-form{
-    background-image: url("/assets//images/box_closed.png");
-}
