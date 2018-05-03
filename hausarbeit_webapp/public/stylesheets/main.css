@@ -31,6 +31,7 @@ html, body {
 
 }
 
+
 .navbar {
     background-color: transparent;
     border-color: black;
@@ -45,12 +46,31 @@ html, body {
 
 .card {
 
-    min-width: 250px;
+    width: 300px;
     margin: 0 auto;
     float: none;
     margin-bottom: 10px;
+
+}
+.card-box{
+    background-color:transparent!important;
+    border-color: transparent!important;
+}
+.card-body{
+    height: 100%;
+    overflow-y: auto;
 }
 
+.card-body-box{
+    height: 120px;
+    overflow-y: auto;
+    margin-top:74px;
+    margin-right: 50px;
+}
+
+.custom-card-footer{
+    margin-top: -15px;
+}
 
 
 .card:hover{
@@ -83,4 +103,6 @@ html, body {
 h1 {
     text-align: center;
 }
+
+
 

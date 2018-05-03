@@ -38,17 +38,23 @@ function learnnowPage(context) {
             .appendTo(context.$element())
             .then(function () {
                 $.each(json, function(key, value) {
-                    var card = $('<div class="col-xl-3 col-md-4 col-sm-6 d-flex align-items-stretch "><div class="card"><div class="card-body"><h4 class="card-title">'+value.title+'</h4><p class="card-text">'+value.description+'</p></div><div class="custom-card-footer"><a href="#/editbox/'+value.id +' "><img id="edit'+value.id +'" class="settingsWheel" src="/assets//images/icons/settings.svg" alt="editBox"  width="20" height="20" /></a></div></div>')
+                    var card = $('<div class="col-xl-3 col-md-4 col-sm-6   "><div id="boxIMG'+value.id+'" class="card card-box  "><img id="boxchangestate'+value.id+'" class="card-img-top boxOpen" src="/assets//images/box_closed.png" alt="Karteikarte"><div class="card-img-overlay"><div class="card-body card-body-box"><h4 class="card-title">'+value.title+'</h4><p class="card-text">'+value.description+'</p></div><div class="custom-card-footer"><a href="#/editbox/'+value.id +' "><img id="edit'+value.id +'" class="settingsWheel" src="/assets//images/icons/settings.svg" alt="editBox"  width="20" height="20" /></a></div></div></div>')
                     $(".box" ).append(card);
+                    $("#boxIMG"+value.id).hover(function(){
+                        $("#boxchangestate"+value.id).attr("src","/assets//images/box_open.png");
+                    }, function() {
+                        $("#boxchangestate"+value.id).attr("src","/assets//images/box_closed.png");
+                    });
 
 
 
                 });
-                var createCard = $('<div class="col-xl-3 col-md-4 col-sm-6 d-flex align-items-stretch "><div class="card align-items-center"><a href="#/createbox"><div class="card-body "><img src="/assets//images/icons/add.svg" alt="addBox"  width="80" height="80" /></div></a></div></div>')
+                var createCard = $('<div class="col-xl-3 col-md-4 col-sm-6   "><div class="card card-box align-items-center "><img id="boxchangestate'+0+'" class="card-img-top boxOpen" src="/assets//images/box_closed.png" alt="Karteikarte"><div class="card-img-overlay"><a href="#/createbox"><div class="card-body card-body-box"><img src="/assets//images/icons/add.svg" alt="addBox"  width="80" height="80" /></div></a></div></div></div>')
                 $(".box" ).append(createCard);
-
-            });
+            })
     });
+
+
 }
 
 function createBoxPage(context){
@@ -103,12 +109,12 @@ function editBoxPage(context, id) {
             .then(function(){
                 $.each(json, function(key, value) {
                     if (value.box.id == id)
-                        var card = $('<div class="col-xl-3 col-md-4 col-sm-6 d-flex align-items-stretch "><div class="card"><div class="card-body"><h4 class="card-title">' + value.question + '</h4><p class="card-text">' + value.answer + '</p></div><div class="custom-card-footer"></div></div>')
+                        var card = $('<div class="col-xl-3 col-md-4 col-sm-6  align-items-stretch "><div class="card "><img class="card-img-top" src="/assets//images/card.png" alt="Karteikarte"><div class="card-img-overlay"><div class="card-body"><h4 class="card-question">' + value.question + '</h4><p class="card-answer">' + value.answer + '</p></div></div>')
                     $(".cards").append(card);
 
                 });
 
-                var createCard = $('<div class="col-xl-3 col-md-4 col-sm-6 d-flex align-items-stretch "><div class="card align-items-center"><a href="#/createcard/'+ id +'"><div class="card-body "><img src="/assets//images/icons/add.svg" alt="addCard"  width="80" height="80" /></div></a></div></div>')
+                var createCard = $('<div class="col-xl-3 col-md-4 col-sm-6  align-items-stretch "><div class="card align-items-center "><img class="card-img-top" src="/assets//images/card.png" alt="Karteikarte"><div class="card-img-overlay"><a href="#/createcard/'+ id +'"><div class="card-body "><img src="/assets//images/icons/add.svg" alt="addCard"  width="80" height="80" ></div></a></a></div></div>')
                 $(".cards" ).append(createCard);
             });
 
