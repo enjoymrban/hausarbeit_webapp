@@ -1,14 +1,19 @@
-html, body {
+
+html{
+    height: 100%;
+}
+
+body {
     height: 100%;
     /*background-image: linear-gradient(to top, #5ee7df 0%, #b490ca 100%);*/
     /*background-repeat: no-repeat;*/
     /*background-attachment: fixed;*/
 
-    background-image: url("/assets//images/linebackground.png");
-
+    background-image: url("/assets//images/pencil_background2.jpg");
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    font-family: 'The Girl Next Door', cursive;
 }
-
-
 
 
 #wrap {
@@ -31,7 +36,7 @@ html, body {
 
 }
 
-
+/*Navbar*/
 .navbar {
     background-color: transparent;
     border-color: black;
@@ -44,6 +49,8 @@ html, body {
 
 }
 
+/*Cards*/
+
 .card {
 
     width: 300px;
@@ -51,6 +58,10 @@ html, body {
     float: none;
     margin-bottom: 10px;
 
+}
+.card-form
+{
+    width: auto!important;
 }
 .card-box{
     background-color:transparent!important;
@@ -66,6 +77,10 @@ html, body {
     overflow-y: auto;
     margin-top:74px;
     margin-right: 50px;
+}
+
+.card-body-card {
+    margin-top:15px;
 }
 
 .custom-card-footer{
@@ -92,7 +107,7 @@ html, body {
 
 .settingsWheel:hover {
 
-    -webkit-animation: spin 4s infinite linear;
+    -webkit-animation: spin 2s infinite linear;
 }
 
 @-webkit-keyframes spin {
@@ -100,9 +115,15 @@ html, body {
     100% {-webkit-transform: rotate(360deg);}
 }
 
+
+
 h1 {
     text-align: center;
 }
 
 
 
+/*createcard.html*/
+form{
+    background-image: url("/assets//images/box_closed.png");
+}
