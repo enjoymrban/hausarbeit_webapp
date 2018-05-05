@@ -4,6 +4,7 @@ create table box (
   id bigint(20) NOT NULL AUTO_INCREMENT,
   title VARCHAR(20),
   description VARCHAR(20),
+  color VARCHAR(20),
   PRIMARY KEY (id)
 );
 
@@ -30,7 +31,7 @@ create table card (
 );
 
 
-INSERT INTO box (title, description) VALUES ('englisch', 'letzte Prüfung');
+INSERT INTO box (title, description, color) VALUES ('englisch', 'letzte Prüfung', 'green');
 INSERT INTO category (title) VALUES ('Englisch');
 #INSERT INTO card ( question, answer, nTries, nCorrect, category_id, box_id) VALUES ('assertiveness','Durchsetzungsvermögen',0,0,1,1);
   #('debrise','Trümmer',0,0,1,1),

@@ -1,4 +1,5 @@
 
+
 html{
     height: 100%;
 }
@@ -9,10 +10,11 @@ body {
     /*background-repeat: no-repeat;*/
     /*background-attachment: fixed;*/
 
-    background-image: url("/assets//images/pencil_background2.jpg");
+    background-image: url("/assets//images/bgcards.jpg");
     background-attachment: fixed;
     background-repeat: no-repeat;
-    font-family: 'The Girl Next Door', cursive;
+    /*background-position: center;*/
+
 }
 
 
@@ -63,7 +65,7 @@ body {
 {
     width: auto;
     min-width: 350px;
-    max-width: 550px!important;
+    max-width: 600px!important;
 
 }
 .card-box{
@@ -88,8 +90,13 @@ body {
 
 .custom-card-footer{
     margin-top: -15px;
+    margin-right: 50px;
 }
 
+/*Edit Box Page*/
+#newcategory {
+    padding: .375rem .75rem;
+}
 
 .card:hover{
     background-color:lightgray;
@@ -103,10 +110,15 @@ body {
     justify-content: center;
 }
 
-/*Edit Box Wheel*/
-.settingsWheel{
-    margin:3px;
+/*Icons*/
+
+.deleteBoxIcon {
+    cursor: pointer;
+    float: right;
+    margin-right: 20px;
+    margin-top: 12px;
 }
+
 
 .settingsWheel:hover {
 

@@ -56,6 +56,7 @@ public class BoxRepository {
         Box bookToUpdate = em.find(Box.class, box.getId());
         bookToUpdate.setTitle(box.getTitle());
         bookToUpdate.setDescription(box.getDescription());
+        bookToUpdate.setColor(box.getColor());
         return bookToUpdate;
     }
 
