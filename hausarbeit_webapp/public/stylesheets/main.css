@@ -1,6 +1,5 @@
-
-
-html{
+/*GENERAL*/
+html {
     height: 100%;
 }
 
@@ -10,32 +9,36 @@ body {
     /*background-repeat: no-repeat;*/
     /*background-attachment: fixed;*/
 
-    background-image: url("/assets//images/bgcards.jpg");
+    background-image: url("/assets//images/bg_book.jpg");
     background-attachment: fixed;
     background-repeat: no-repeat;
     /*background-position: center;*/
 
 }
 
-
 #wrap {
     min-height: 100%;
 }
 
 #main {
-    /*overflow:auto;*/
-    padding-bottom:60px; /* this needs to be bigger than footer height*/
+    padding-bottom: 60px; /* this needs to be bigger than footer height*/
 }
 
 .footer {
     position: relative;
     margin-top: -60px; /** negative value of footer height *!*/
     height: 60px;
-    clear:both;
-    padding-top:20px;
+    clear: both;
+    padding-top: 20px;
     text-align: center;
     background-color: transparent;
 
+}
+
+.disablelinkcss,
+.disablelinkcss:hover {
+    color: inherit;
+    text-decoration: inherit;
 }
 
 /*Navbar*/
@@ -43,7 +46,6 @@ body {
     background-color: transparent;
     border-color: black;
 }
-
 
 #app {
     height: 100%;
@@ -61,34 +63,36 @@ body {
     margin-bottom: 10px;
 
 }
-.card-form
-{
+
+.card-form {
     width: auto;
     min-width: 350px;
-    max-width: 600px!important;
+    max-width: 600px !important;
 
 }
-.card-box{
-    background-color:transparent!important;
-    border-color: transparent!important;
+
+.card-box {
+    background-color: transparent !important;
+    border-color: transparent !important;
 }
-.card-body{
+
+.card-body {
     height: 100%;
     overflow-y: auto;
 }
 
-.card-body-box{
+.card-body-box {
     height: 120px;
     overflow-y: auto;
-    margin-top:74px;
+    margin-top: 74px;
     margin-right: 50px;
 }
 
 .card-body-card {
-    margin-top:15px;
+    margin-top: 15px;
 }
 
-.custom-card-footer{
+.custom-card-footer {
     margin-top: -15px;
     margin-right: 50px;
 }
@@ -98,17 +102,24 @@ body {
     padding: .375rem .75rem;
 }
 
-.card:hover{
-    background-color:lightgray;
+.card:hover {
+    background-color: lightgray;
 }
 
-/*Form Sections*/
+/*Sections*/
 .createbox,
-.createcard{
+.createcard {
     display: flex;
     align-items: center;
     justify-content: center;
 }
+
+
+/*Create Card Page*/
+#defaultSubmit{
+    display: none;
+}
+
 
 /*Icons*/
 
@@ -119,23 +130,23 @@ body {
     margin-top: 12px;
 }
 
-
 .settingsWheel:hover {
 
     -webkit-animation: spin 2s infinite linear;
 }
 
 @-webkit-keyframes spin {
-    0%  {-webkit-transform: rotate(0deg);}
-    100% {-webkit-transform: rotate(360deg);}
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
 }
-
-
 
 h1 {
     text-align: center;
 }
 
-
-
 /*createcard.html*/
+

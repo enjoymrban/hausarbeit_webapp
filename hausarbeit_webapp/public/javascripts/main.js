@@ -37,46 +37,47 @@ jQuery(function () {
     $.ajax({
         url: url,
         type: "GET",
-        dataType: "json"
-    }).done(function (json) {
-        return json;
-    })
-};
+        dataType: "json",
+        timeout: 3000
+    });
+}
 
-function createLearnNowPage2(context){
-    var allBoxes = loadAllBoxes();
-    context.render('/assets/html/learnnow.html', {})
-        .appendTo(context.$element())
-        . then(function (){
-            $.each(allBoxes, function(key, value){
-                var box = $('<div class="col-xl-3 col-md-4 col-sm-6   "><div id="boxIMG' + value.id + '" class="card card-box  "><a href="#/studying/' + value.id + '"><img id="boxchangestate' + value.id + '" class="card-img-top boxOpen" src="/assets//images/box_closed_' + value.color + '.png" alt="Karteikarte"></a><div class="card-img-overlay"><div class="card-body card-body-box"><h4 class="card-title">' + value.title + '</h4><p class="card-text">' + value.description + '</p></div><div class="custom-card-footer"><a href="#/editbox/' + value.id + ' "><img id="edit' + value.id + '" class="settingsWheel" src="/assets//images/icons/settings.svg" alt="editBox"  width="20" height="20" /></a><img id="delete' + value.id + '" data-toggle="confirmation" class="deleteBoxIcon" src="/assets//images/icons/delete.svg" alt="deleteBox"  width="20" height="20" /></div></div></div>')
-                $(".box").append(box);
+function createLearnNowPage2(context) {
+    loadAllBoxes()
+        .done(function (json) {
+            context.render('/assets/html/learnnow.html', {})
+                .appendTo(context.$element())
+                .then(function () {
+                    $.each(json, function (key, value) {
+                        var box = $('<div class="col-xl-3 col-md-4 col-sm-6   "><div id="boxIMG' + value.id + '" class="card card-box  "><a href="#/studying/' + value.id + '"><img id="boxchangestate' + value.id + '" class="card-img-top boxOpen" src="/assets//images/box_closed_' + value.color + '.png" alt="Karteikarte"></a><div class="card-img-overlay"><div class="card-body card-body-box"><h4 class="card-title">' + value.title + '</h4><p class="card-text">' + value.description + '</p></div><div class="custom-card-footer"><a href="#/editbox/' + value.id + ' "><img id="edit' + value.id + '" class="settingsWheel" src="/assets//images/icons/settings.svg" alt="editBox"  width="20" height="20" /></a><img id="delete' + value.id + '" data-toggle="confirmation" class="deleteBoxIcon" src="/assets//images/icons/delete.svg" alt="deleteBox"  width="20" height="20" /></div></div></div>')
+                        $(".box").append(box);
 
-                $("#boxIMG" + value.id).hover(function () {
-                    $("#boxchangestate" + value.id).attr("src", "/assets//images/box_open_" + value.color + ".png");
-                }, function () {
-                    $("#boxchangestate" + value.id).attr("src", "/assets//images/box_closed_" + value.color + ".png");
+                        $("#boxIMG" + value.id).hover(function () {
+                            $("#boxchangestate" + value.id).attr("src", "/assets//images/box_open_" + value.color + ".png");
+                        }, function () {
+                            $("#boxchangestate" + value.id).attr("src", "/assets//images/box_closed_" + value.color + ".png");
+                        });
+
+                        $("#delete" + value.id).click(function () {
+                            deleteBox(value.id);
+
+                        });
+
+
+                    });
+                    var box = $('<div class="col-xl-3 col-md-4 col-sm-6   "><div id="boxIMG0" class="card card-box align-items-center "><img id="addNewBox" class="card-img-top" src="/assets//images/box_closed_add.png" alt="Karteikarte"><div class="card-img-overlay"><a href="#/createbox"><div class="card-body card-body-box"></div></a></div></div></div>')
+                    $(".box").append(box);
+
+                    $("#boxIMG0").hover(function () {
+                        $("#addNewBox").attr("src", "/assets//images/box_open_add.png");
+                    }, function () {
+                        $("#addNewBox").attr("src", "/assets//images/box_closed_add.png");
+                    });
+
                 });
 
-                $("#delete" + value.id).click(function () {
-                    deleteBox(value.id);
-
-                });
-
-
-            });
-            var box = $('<div class="col-xl-3 col-md-4 col-sm-6   "><div id="boxIMG0" class="card card-box align-items-center "><img id="addNewBox" class="card-img-top" src="/assets//images/box_closed_add.png" alt="Karteikarte"><div class="card-img-overlay"><a href="#/createbox"><div class="card-body card-body-box"></div></a></div></div></div>')
-            $(".box").append(box);
-
-            $("#boxIMG0").hover(function () {
-                $("#addNewBox").attr("src", "/assets//images/box_open_add.png");
-            }, function () {
-                $("#addNewBox").attr("src", "/assets//images/box_closed_add.png");
-            });
 
         });
-
-
 }*/
 
 
@@ -94,7 +95,7 @@ function createLearnNowPage(context) {
             .then(function () {
                 $.each(json, function (key, value) {
 
-                    var box = $('<div class="col-xl-3 col-md-4 col-sm-6   "><div id="boxIMG' + value.id + '" class="card card-box  "><a href="#/studying/' + value.id + '"><img id="boxchangestate' + value.id + '" class="card-img-top boxOpen" src="/assets//images/box_closed_' + value.color + '.png" alt="Karteikarte"></a><div class="card-img-overlay"><div class="card-body card-body-box"><h4 class="card-title">' + value.title + '</h4><p class="card-text">' + value.description + '</p></div><div class="custom-card-footer"><a href="#/editbox/' + value.id + ' "><img id="edit' + value.id + '" class="settingsWheel" src="/assets//images/icons/settings.svg" alt="editBox"  width="20" height="20" /></a><img id="delete' + value.id + '" data-toggle="confirmation" class="deleteBoxIcon" src="/assets//images/icons/delete.svg" alt="deleteBox"  width="20" height="20" /></div></div></div>')
+                    var box = $('<div class="col-xl-3 col-md-4 col-sm-6   "><div id="boxIMG' + value.id + '" class="card card-box  "><img id="boxchangestate' + value.id + '" class="card-img-top boxOpen" src="/assets//images/box_closed_' + value.color + '.png" alt="Karteikarte"><div class="card-img-overlay"><a class="disablelinkcss" href="#/studying/' + value.id + '"><div  class="card-body card-body-box"><h4 class="card-title">' + value.title + '</h4><p id="test1" class="card-text">' + value.description + '</p></div></a><div class="custom-card-footer"><a href="#/editbox/' + value.id + ' "><img  id="edit' + value.id + '" class="settingsWheel" src="/assets//images/icons/settings.svg" alt="editBox"  width="20" height="20" /></a><img id="delete' + value.id + '" data-toggle="confirmation" class="deleteBoxIcon" src="/assets//images/icons/delete.svg" alt="deleteBox"  width="20" height="20" /></div></div></div>')
                     $(".box").append(box);
 
                     $("#boxIMG" + value.id).hover(function () {
@@ -125,7 +126,7 @@ function createLearnNowPage(context) {
 
 }
 
-/* BOX PAGE*/
+/* CREATE BOX PAGE*/
 function createBoxPage(context) {
     context.render('/assets/html/createbox.html', {})
         .appendTo(context.$element())
@@ -140,7 +141,7 @@ function createBoxPage(context) {
 function createBox() {
     var name = $("#boxname").val();
     var description = $("#boxdescription").val();
-    var colorCase = Math.floor(Math.random() * 3);
+    var colorCase = Math.floor(Math.random() * 4);
     var boxColor = "";
     switch (colorCase) {
         case 0:
@@ -150,6 +151,9 @@ function createBox() {
             boxColor = "blue";
             break;
         case 2:
+            boxColor = "red";
+            break;
+        case 3:
             boxColor = "green";
             break;
         default:
@@ -226,7 +230,7 @@ function createEditBoxPage(context, id) {
 
 }
 
-/* CARD PAGE*/
+/* CREATE CARD PAGE*/
 function createCardPage(context, boxid) {
 
     var url = '/api/category';
@@ -249,15 +253,19 @@ function createCardPage(context, boxid) {
                 $('#createcardtitle').html("Karte zu Lernkartei " + boxid + " hinzufügen");
                 $('#createcardbutton').click(function () {
                     createCard(boxid);
+
+                });
+                /*The Button that gets triggered by ENTER, not visible in HTML */
+                $('#defaultSubmit').click(function () {
+                    createCard(boxid);
                 });
 
-            })
-            .then(function () {
                 $('#addcategorybutton').click(function () {
                     createCategory(boxid);
                 });
 
             })
+
     });
 
 }
@@ -325,6 +333,7 @@ function createCard(boxId) {
 
 /* STUDY PAGE*/
 function createStudyPage(context, boxid) {
-    alert(boxid);
+    alert("studying box:" + boxid);
 }
+
 
