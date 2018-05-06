@@ -7,23 +7,24 @@
 
         <div class="col-xl-12">
             <h1>Lernkartei erstellen</h1>
-            <form >
+            <form id="createboxform" class="needs-validation" novalidate>
                 <div class="form-group row">
                     <label for="boxName" class="col-sm-4 col-form-label">Name:</label>
                     <div class="col-sm-8">
-                    <input maxlength="13" type="text" class="form-control" id="boxname" placeholder="Karteinamen eingeben!" >
+                    <input maxlength="11" min="3"  type="text" class="form-control" id="boxname" placeholder="min. 3 Zeichen" required >
                     </div>
                 </div>
                 <div class="form-group row">
 
                     <label for="boxdescription" class="col-sm-4 col-form-label">Beschreibung:</label>
                     <div class="col-sm-8">
-                        <textarea maxlength="20" type="text" class="form-control" id="boxdescription" placeholder="Beschreibung eingeben!" ></textarea>
+                        <textarea maxlength="38"  type="text" class="form-control" id="boxdescription" placeholder="min. 3 Zeichen" required></textarea>
                     </div>
                 </div>
 
 
-                <button id="createboxbutton"   class="btn btn-primary" >Lernkartei erstellen</button>
+                <button id="createboxbutton"  type="submit" class="btn btn-primary" >Lernkartei erstellen</button>
+                <div class="notValidated-Feedback"><p>Alle Felder müssen min. 3 Zeichen enthalten!</p></div>
             </form>
         </div>
 

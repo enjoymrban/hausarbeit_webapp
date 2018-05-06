@@ -9,7 +9,7 @@ body {
     /*background-repeat: no-repeat;*/
     /*background-attachment: fixed;*/
 
-    background-image: url("/assets//images/bg_book.jpg");
+    background-image: url("/assets//images/bgcards2.jpg");
     background-attachment: fixed;
     background-repeat: no-repeat;
     /*background-position: center;*/
@@ -82,19 +82,34 @@ body {
 }
 
 .card-body-box {
-    height: 120px;
+    height: 130px;
     overflow-y: auto;
+    padding-left:0;
     margin-top: 74px;
     margin-right: 50px;
 }
 
-.card-body-card {
-    margin-top: 15px;
+.custom-card-header{
+    padding: .75rem 1.25rem;
 }
 
+
+
 .custom-card-footer {
-    margin-top: -15px;
+    margin-top: -20px;
     margin-right: 50px;
+}
+
+/*Create Box Page*/
+.notValidated-Feedback {
+    display: none;
+    color:red;
+    font-size: 12px;
+}
+
+.notValidated-Feedback p{
+    margin-bottom: -10px;
+
 }
 
 /*Edit Box Page*/
@@ -104,6 +119,10 @@ body {
 
 .card:hover {
     background-color: lightgray;
+}
+
+.editbox .card-body{
+    height: auto;
 }
 
 /*Sections*/
@@ -120,6 +139,29 @@ body {
     display: none;
 }
 
+#createcardbutton {
+    margin-top: 50px;
+}
+
+
+.invalid {
+    border-color: red;
+    border-width: 2px;
+}
+
+.valid {
+    border-color: green;
+    border-width: 2px;
+}
+
+.form-row{
+    margin-bottom: 1rem;
+}
+
+#addcategorybutton {
+    margin-left: 5px;
+}
+
 
 /*Icons*/
 
@@ -127,12 +169,22 @@ body {
     cursor: pointer;
     float: right;
     margin-right: 20px;
-    margin-top: 12px;
+    margin-top: 8px;
 }
 
 .settingsWheel:hover {
 
     -webkit-animation: spin 2s infinite linear;
+}
+
+.deleteCross {
+    height: 15px;
+    width: 15px;
+    float: right;
+    margin-right: -20px;
+    margin-top: -7px;
+    cursor: pointer;
+
 }
 
 @-webkit-keyframes spin {
