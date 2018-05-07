@@ -463,7 +463,7 @@ function validateCategoryForm() {
 
     if (newCategory < 1) {
 
-        $("#newcategory").addClass("invalid");
+        $("#newcategory").removeClass("valid").addClass("invalid");
         return false;
     } else {
         $("#newcategory").removeClass("invalid").addClass("valid");
@@ -519,14 +519,14 @@ function validateCardForm() {
     if (question < 3 || answer < 3) {
         $(".notValidated-Feedback").show();
         if (question < 3) {
-            $("#cardquestion").addClass("invalid");
+            $("#cardquestion").removeClass("valid").addClass("invalid");
         } else {
             $("#cardquestion").removeClass("invalid").addClass("valid");
 
 
         }
         if (answer < 3) {
-            $("#cardanswer").addClass("invalid");
+            $("#cardanswer").removeClass("valid").addClass("invalid");
         } else {
             $("#cardanswer").removeClass("invalid").addClass("valid");
         }
