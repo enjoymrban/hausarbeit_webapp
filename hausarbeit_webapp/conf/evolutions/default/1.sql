@@ -33,7 +33,7 @@ create table card (
 INSERT INTO category (title) VALUES ('Englisch');
 
 INSERT INTO box (title, description, color) VALUES ('englisch', 'letzte Prüfung', 'green');
-INSERT INTO box (title, description, color) VALUES ('Geografie', 'Europas Hauptstädte', 'white');
+INSERT INTO box (title, description, color) VALUES ('Geografie', 'Europas Hauptstädte', 'red');
 
 INSERT INTO card (question, answer, nTries, nCorrect, category_id, box_id) VALUES ('Brotaufstrich', 'spread', 12, 6, 1, 1);
 INSERT INTO card (question, answer, nTries, nCorrect, category_id, box_id) VALUES ('König', 'king', 6, 3, 1, 1);
@@ -53,10 +53,10 @@ INSERT INTO card (question, answer, nTries, nCorrect, category_id, box_id) VALUE
 
 
 
-
-#INSERT INTO card ( question, answer, nTries, nCorrect, category_id, box_id) VALUES ('assertiveness','Durchsetzungsvermögen',0,0,1,1);
-  #('debrise','Trümmer',0,0,1,1),
-  #('fuselage','Rumpf',0,0,1,1),('metal fatigue','Metallermüdung',0,0,1,1);
+INSERT INTO card (question, answer, nTries, nCorrect, category_id, box_id) VALUES ('assertiveness','Durchsetzungsvermögen',0,0,1,1);
+INSERT INTO card (question, answer, nTries, nCorrect, category_id, box_id) VALUES('debrise','Trümmer',0,0,1,1);
+INSERT INTO card (question, answer, nTries, nCorrect, category_id, box_id) VALUES('fuselage','Rumpf',0,0,1,1);
+INSERT INTO card (question, answer, nTries, nCorrect, category_id, box_id) VALUES('metal fatigue','Metallermüdung',0,0,1,1);
 
 
 

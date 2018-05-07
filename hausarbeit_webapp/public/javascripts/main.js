@@ -324,9 +324,9 @@ function createEditBoxPage(context, id) {
                         deleteCard(value.id);
                     });
 
-                  /*  $("#updatecardbutton" + value.id).click(function () {
+                   $("#updatecardbutton" + value.id).click(function () {
                         updateCard(value.id);
-                    });*/
+                    });
 
                 });
 
@@ -363,13 +363,24 @@ function deleteCard(cardId) {
 }
 
 
-/*function updateCard(cardId) {
+function updateCard(cardId) {
     var question = $("#updatequestion"+cardId).val();
     var answer = $("#updateanswer"+cardId).val();
     var postJson = {
         question: question,
-        answer: answer
+        answer: answer,
+        nTries: 0,
+        nCorrect: 0,
+        category: {
+            id: 1
+        },
+        box: {
+            id: 1
+
+        }
     };
+
+
 
     $.ajax({
 
@@ -387,7 +398,7 @@ function deleteCard(cardId) {
         }
     });
 
-}*/
+}
 
 
 /* CREATE CARD PAGE*/
