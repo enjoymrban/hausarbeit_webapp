@@ -30,9 +30,30 @@ create table card (
 
 );
 
+INSERT INTO category (title) VALUES ('Englisch');
 
 INSERT INTO box (title, description, color) VALUES ('englisch', 'letzte Prüfung', 'green');
-INSERT INTO category (title) VALUES ('Englisch');
+INSERT INTO box (title, description, color) VALUES ('Geografie', 'Europas Hauptstädte', 'white');
+
+INSERT INTO card (question, answer, nTries, nCorrect, category_id, box_id) VALUES ('Brotaufstrich', 'spread', 12, 6, 1, 1);
+INSERT INTO card (question, answer, nTries, nCorrect, category_id, box_id) VALUES ('König', 'king', 6, 3, 1, 1);
+INSERT INTO card (question, answer, nTries, nCorrect, category_id, box_id) VALUES ('Butter', 'butter', 8, 6, 1, 1);
+
+INSERT INTO card (question, answer, nTries, nCorrect, category_id, box_id) VALUES ('Schweiz', 'Bern', 8, 6, 1, 2);
+INSERT INTO card (question, answer, nTries, nCorrect, category_id, box_id) VALUES ('Deutschland', 'Berlin', 8, 6, 1, 2);
+INSERT INTO card (question, answer, nTries, nCorrect, category_id, box_id) VALUES ('Frankreich', 'Paris', 8, 6, 1, 2);
+INSERT INTO card (question, answer, nTries, nCorrect, category_id, box_id) VALUES ('Italien', 'Rom', 8, 6, 1, 2);
+INSERT INTO card (question, answer, nTries, nCorrect, category_id, box_id) VALUES ('Tschechien', 'Prag', 8, 6, 1, 2);
+INSERT INTO card (question, answer, nTries, nCorrect, category_id, box_id) VALUES ('Schweden', 'Stockholm', 8, 6, 1, 2);
+INSERT INTO card (question, answer, nTries, nCorrect, category_id, box_id) VALUES ('Östereich', 'Wien', 8, 6, 1, 2);
+INSERT INTO card (question, answer, nTries, nCorrect, category_id, box_id) VALUES ('Kroatien', 'Zegrab', 8, 6, 1, 2);
+INSERT INTO card (question, answer, nTries, nCorrect, category_id, box_id) VALUES ('Polen', 'Warschau', 8, 6, 1, 2);
+INSERT INTO card (question, answer, nTries, nCorrect, category_id, box_id) VALUES ('Montenegro', 'Potgorica', 8, 6, 1, 2);
+INSERT INTO card (question, answer, nTries, nCorrect, category_id, box_id) VALUES ('Ukraine', 'Kiev', 8, 6, 1, 2);
+
+
+
+
 #INSERT INTO card ( question, answer, nTries, nCorrect, category_id, box_id) VALUES ('assertiveness','Durchsetzungsvermögen',0,0,1,1);
   #('debrise','Trümmer',0,0,1,1),
   #('fuselage','Rumpf',0,0,1,1),('metal fatigue','Metallermüdung',0,0,1,1);
