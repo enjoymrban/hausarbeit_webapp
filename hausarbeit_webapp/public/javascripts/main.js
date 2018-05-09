@@ -147,11 +147,6 @@ function validateBoxDelete(boxId) {
     $("#boxdeletevalidated").unbind().click(function () {
         removeCardsInBox(boxId);
 
-        setTimeout(function () {
-            deleteBox(boxId);
-        }, 100);
-
-
     });
 }
 
@@ -178,7 +173,8 @@ function removeCardsInBox(boxId) {
                     }
                 })
             }
-        });
+        })
+        deleteBox(boxId);
     })
 }
 
