@@ -96,11 +96,11 @@ function createLearnNowPage(context) {
                 $.each(json, function (key, value) {
 
                     var box = $('<div class="col-xl-3 col-md-4 col-sm-6   ">' +
-                        '<div id="boxIMG' + value.id + '" class="card card-box  ">' +
+                        '<div id="boxIMG' + value.id + '" class="card">' +
                         '<img id="boxchangestate' + value.id + '" class="card-img-top boxOpen" src="/assets//images/box_closed_' + value.color + '.png" alt="Karteikarte">' +
                         '<div class="card-img-overlay">' +
                         '<a class="disablelinkcss" href="#/studying/' + value.id + '">' +
-                        '<div  class="card-body card-body-box">' +
+                        '<div  class="card-body">' +
                         '<h4 class="card-title">' + value.title + '</h4>' +
                         '<p id="test1" class="card-text">' + value.description + '</p></div></a>' +
                         '<div class="custom-card-footer">' +
@@ -123,7 +123,7 @@ function createLearnNowPage(context) {
 
                 });
                 var box = $('<div class="col-xl-3 col-md-4 col-sm-6   ">' +
-                    '<div id="boxIMG0" class="card card-box align-items-center ">' +
+                    '<div id="boxIMG0" class="card align-items-center ">' +
                     '<img id="addNewBox" class="card-img-top" src="/assets//images/box_closed_add.png" alt="Karteikarte">' +
                     '<div class="card-img-overlay"><a href="#/createbox">' +
                     '<div class="card-body card-body-box"></div></a></div></div></div>')
