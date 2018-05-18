@@ -93,7 +93,19 @@ function createLearnNowPage(context) {
         context.render('/assets/html/learnnow.html', {})
             .appendTo(context.$element())
             .then(function () {
-                $.each(json, function (key, value) {
+                var box = $('<div class="col-xl-3 col-md-4 col-sm-6   ">' +
+                    '<div id="boxIMG0" class="card align-items-center ">' +
+                    '<img id="addNewBox" class="card-img-top" src="/assets//images/box_closed_add.png" alt="Karteikarte">' +
+                    '<div class="card-img-overlay"><a href="#/createbox">' +
+                    '<div class="card-body card-body-box"></div></a></div></div></div>')
+                $(".box").append(box);
+
+                $("#boxIMG0").hover(function () {
+                    $("#addNewBox").attr("src", "/assets//images/box_open_add.png");
+                }, function () {
+                    $("#addNewBox").attr("src", "/assets//images/box_closed_add.png");
+                });
+                $.each(json.reverse(), function (key, value) {
 
                     var box = $('<div class="col-xl-3 col-md-4 col-sm-6   ">' +
                         '<div id="boxIMG' + value.id + '" class="card">' +
@@ -122,18 +134,7 @@ function createLearnNowPage(context) {
 
 
                 });
-                var box = $('<div class="col-xl-3 col-md-4 col-sm-6   ">' +
-                    '<div id="boxIMG0" class="card align-items-center ">' +
-                    '<img id="addNewBox" class="card-img-top" src="/assets//images/box_closed_add.png" alt="Karteikarte">' +
-                    '<div class="card-img-overlay"><a href="#/createbox">' +
-                    '<div class="card-body card-body-box"></div></a></div></div></div>')
-                $(".box").append(box);
 
-                $("#boxIMG0").hover(function () {
-                    $("#addNewBox").attr("src", "/assets//images/box_open_add.png");
-                }, function () {
-                    $("#addNewBox").attr("src", "/assets//images/box_closed_add.png");
-                });
 
             })
     });
@@ -288,55 +289,80 @@ function validateBoxForm() {
 
 /*EDIT BOX PAGE*/
 function createEditBoxPage(context, id) {
-
-    var url = '/api/card';
+    var url = '/api/category';
     $.ajax({
         url: url,
         type: "GET",
         dataType: "json"
-    }).done(function (json) {
-        context.render('/assets/html/editbox.html', {})
-            .appendTo(context.$element())
-            .then(function () {
-                $.each(json, function (key, value) {
-                    if (value.box.id == id)
-                        var card = $('<div class="col-xl-4 col-md-6   align-items-stretch ">' +
-                            '<div class="card ">' +
-                            '<img class="card-img-top" src="/assets//images/card.png" alt="Karteikarte">' +
-                            '<div class="card-img-overlay">' +
-                            '<div class="custom-card-header">' +
-                            '<img id="deleteCard' + value.id + '" class="deleteCross" src="/assets//images/icons/delete_cross.png"></div>' +
-                            '<div class="card-body">' +
-                            '<form><div class="form-group">' +
-                            '<input id="updatequestion' + value.id + '" class="card-question form-control" value="' + value.question + '"></div>' +
-                            '<div class="form-group">' +
-                            '<input id="updateanswer' + value.id + '"class="card-answer form-control" value="' + value.answer + '"></div>' +
-                            '<button id="updatecardbutton' + value.id + '" type="submit" class="btn btn-primary">Aktualisieren</button>' +
-                            '</form></div></div>')
+    }).done(function (jsonCat) {
+
+        var url = '/api/card';
+        $.ajax({
+            url: url,
+            type: "GET",
+            dataType: "json"
+        }).done(function (jsonCard) {
+            context.render('/assets/html/editbox.html', {})
+                .appendTo(context.$element())
+                .then(function () {
+                    // Add empty card
+                    var createCard = $('<div class="col-xl-4 col-md-6  align-items-stretch ">' +
+                        '<div class="card align-items-center ">' +
+                        '<img class="card-img-top" src="/assets//images/card.png" alt="Karteikarte">' +
+                        '<div class="card-img-overlay"><a href="#/createcard/' + id + '">' +
+                        '<div class="card-body ">' +
+                        '<img src="/assets//images/icons/add.svg" alt="addCard"  width="80" height="80" >' +
+                        '</div></a></a></div></div>')
+                    $(".cards").append(createCard);
+
+                    $.each(jsonCard, function (key, value) {
+
+                            //Add card if it matches the Box Id
+                            if(value.box.id == id) {
+                                var card = $('<div class="col-xl-4 col-md-6   align-items-stretch ">' +
+                                    '<div class="card ">' +
+                                    '<img class="card-img-top" src="/assets//images/card.png" alt="Karteikarte">' +
+                                    '<div class="card-img-overlay">' +
+                                    '<div class="custom-card-header">' +
+                                    '<select class="form-control" id="selectcategory' + value.id + '" size="1"></select>' +
+                                    '<img id="deleteCard\' + value.id + \'" class="deleteCross" src="/assets//images/icons/delete_cross.png">' +
+                                    '</div>' +
+                                    '<div class="card-body">' +
+                                    '<form><div class="form-group">' +
+                                    '<input id="updatequestion' + value.id + '" class="card-question form-control" value="' + value.question + '" placeholder="Frage"></div>' +
+                                    '<div class="form-group">' +
+                                    '<input id="updateanswer' + value.id + '" class="card-answer form-control" value="' + value.answer + '" placeholder="Antwort"></div>' +
+                                    '<button id="updatecardbutton' + value.id + '" type="submit" class="btn btn-primary">Aktualisieren</button>' +
+                                    '</form></div></div>')
+
+                                $(".cards").append(card);
+
+                                //Add Category selection
+                                $.each(jsonCat, function (key, cat) {
+
+                                    var catList = $('<option value="' + cat.id + '">' + cat.title + '</option>')
+                                    $("#selectcategory" + value.id).append(catList);
+                                    if (cat.id == value.category.id) {
+                                        document.getElementById("selectcategory" +value.id).selectedIndex = cat.id-1;
+                                    }
+                                });
 
 
-                    $(".cards").append(card);
-                    $("#deleteCard" + value.id).click(function () {
-                        deleteCard(value.id);
+                                $("#deleteCard" + value.id).click(function () {
+                                    deleteCard(value.id);
+                                });
+
+                                $("#updatecardbutton" + value.id).click(function () {
+                                    updateCard(value.id);
+                                });
+                            }
                     });
 
-                   $("#updatecardbutton" + value.id).click(function () {
-                        updateCard(value.id);
-                    });
 
                 });
 
-                var createCard = $('<div class="col-xl-4 col-md-6  align-items-stretch ">' +
-                    '<div class="card align-items-center ">' +
-                    '<img class="card-img-top" src="/assets//images/card.png" alt="Karteikarte">' +
-                    '<div class="card-img-overlay"><a href="#/createcard/' + id + '">' +
-                    '<div class="card-body ">' +
-                    '<img src="/assets//images/icons/add.svg" alt="addCard"  width="80" height="80" >' +
-                    '</div></a></a></div></div>')
-                $(".cards").append(createCard);
-            });
 
-
+        });
     });
 
 }
@@ -352,7 +378,7 @@ function deleteCard(cardId) {
         },
 
         error: function (errormessage) {
-            alert("not deleted");
+            alert("Card with the Id:" + errormessage.id + " not deleted");
         }
     });
 
@@ -360,38 +386,50 @@ function deleteCard(cardId) {
 
 
 function updateCard(cardId) {
-    var question = $("#updatequestion"+cardId).val();
-    var answer = $("#updateanswer"+cardId).val();
-    var postJson = {
-        question: question,
-        answer: answer,
-        nTries: 0,
-        nCorrect: 0,
-        category: {
-            id: 1
-        },
-        box: {
-            id: 1
 
-        }
-    };
-
-
-
+    var url = '/api/card/'+cardId;
     $.ajax({
+        url: url,
+        type: "GET",
+        dataType: "json"
+    }).done(function (json) {
+        var question = $("#updatequestion" + cardId).val();
+        var answer = $("#updateanswer" + cardId).val();
+        var option = $("#selectcategory" + cardId).val();
+        var postJson = {
+            question: question,
+            answer: answer,
+            nTries: json.nTries,
+            nCorrect: json.nCorrect,
+            category: {
+                id: option
+            },
+            box: {
+                id: json.box.id
 
-        type: 'PUT',
-        url: '/api/card/'+cardId,
-        data: JSON.stringify(postJson),
-        contentType: "application/json",
-        dataType: 'json',
-        success: function (msg) {
-            location.reload();
-        },
-        error: function (errormessage) {
-            alert("card wasn't updated");
+            }
+        };
 
-        }
+
+        $.ajax({
+
+            type: 'PUT',
+            url: '/api/card/' + cardId,
+            data: JSON.stringify(postJson),
+            contentType: "application/json",
+            dataType: 'json',
+            success: function (msg) {
+                //location.reload();
+                //history.go(0);
+                window.location = '#/editbox/' + json.box.id;
+
+            },
+            error: function (errormessage) {
+                alert("card wasn't updated");
+
+            }
+        });
+
     });
 
 }
@@ -520,6 +558,7 @@ function createCard(boxId) {
 function validateCardForm() {
 
 
+
     var question = $("#cardquestion").val().length;
     var answer = $("#cardanswer").val().length;
 
@@ -539,6 +578,8 @@ function validateCardForm() {
         }
         return false;
     } else {
+        $("#cardquestion").removeClass("invalid").addClass("valid");
+        $("#cardanswer").removeClass("invalid").addClass("valid");
         return true;
     }
 
