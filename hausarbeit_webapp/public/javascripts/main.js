@@ -267,16 +267,16 @@ function validateBoxForm() {
     if (name < 3 || description < 3) {
         $(".notValidated-Feedback").show();
         if (name < 3) {
-            $("#boxname").addClass("invalid");
+            $("#boxname").addClass("invalid").val('').attr("placeholder", "min. 3 Zeichen");
         } else {
-            $("#boxname").removeClass("invalid").addClass("valid");
+            $("#boxname").removeClass("invalid").addClass("valid").attr("placeholder", "Name");
 
 
         }
         if (description < 3) {
-            $("#boxdescription").addClass("invalid");
+            $("#boxdescription").addClass("invalid").val('').attr("placeholder", "min. 3 Zeichen");
         } else {
-            $("#boxdescription").removeClass("invalid").addClass("valid");
+            $("#boxdescription").removeClass("invalid").addClass("valid").attr("placeholder", "Beschreibung");
         }
         return false;
     } else {
@@ -325,7 +325,7 @@ function createEditBoxPage(context, id) {
                                 '<div class="card-img-overlay">' +
                                 '<div class="custom-card-header">' +
                                 '<select class="form-control" id="selectcategory' + value.id + '" size="1"></select>' +
-                                '<img id="deleteCard\' + value.id + \'" class="deleteCross" src="/assets//images/icons/delete_cross.png">' +
+                                '<img id="deleteCard' + value.id + '" class="deleteCross" src="/assets//images/icons/delete_cross.png">' +
                                 '</div>' +
                                 '<div class="card-body">' +
                                 '<form id="updateCardForm'+value.id+'"><div class="form-group">' +
@@ -333,8 +333,8 @@ function createEditBoxPage(context, id) {
                                 '<div class="form-group">' +
                                 '<input id="updateanswer' + value.id + '" class="card-answer form-control" value="' + value.answer + '" placeholder="Antwort"></div>' +
                                 '<button id="updatecardbutton' + value.id + '" type="submit" class="btn btn-primary">Aktualisieren</button>' +
-                                '<div ><p class="notValidated-Feedback">Alle Felder müssen min. 3 Zeichen enthalten!</p></div>' +
-                                '</form></div></div>')
+
+                                '</form></div></div>');
 
                             $(".cards").append(card);
 
@@ -437,23 +437,23 @@ function updateCard(cardId) {
 
 
 function validateUpdateCardForm(cardId) {
-    var question = $("#updatequestion" + cardId).val();
-    var answer = $("#updateanswer" + cardId).val();
+    var question = $("#updatequestion" + cardId).val().length;
+    var answer = $("#updateanswer" + cardId).val().length;
 
 
     if (question < 3 || answer < 3) {
-        $("#updateCardForm" +cardId).find(".notValidated-Feedback").show();
+
         if (question < 3) {
-            $("#updatequestion" + cardId).removeClass("valid").addClass("invalid");
+            $("#updatequestion" + cardId).removeClass("valid").addClass("invalid").val('').attr("placeholder", "min. 3 Zeichen");
         } else {
-            $("#updatequestion" + cardId).removeClass("invalid").addClass("valid");
+            $("#updatequestion" + cardId).removeClass("invalid").addClass("valid").attr("placeholder", "Frage");
 
 
         }
         if (answer < 3) {
-            $("#updateanswer" + cardId).removeClass("valid").addClass("invalid");
+            $("#updateanswer" + cardId).removeClass("valid").addClass("invalid").val('').attr("placeholder", "min. 3 Zeichen");
         } else {
-            $("#updateanswer" + cardId).removeClass("invalid").addClass("valid");
+            $("#updateanswer" + cardId).removeClass("invalid").addClass("valid").attr("placeholder", "Antwort");
         }
         return false;
     } else {
@@ -539,10 +539,10 @@ function validateCategoryForm() {
 
     if (newCategory < 1) {
 
-        $("#newcategory").removeClass("valid").addClass("invalid");
+        $("#newcategory").removeClass("valid").addClass("invalid").val('').attr("placeholder", "min. 1 Zeichen");
         return false;
     } else {
-        $("#newcategory").removeClass("invalid").addClass("valid");
+        $("#newcategory").removeClass("invalid").addClass("valid").attr("placeholder", "neue Kategorie");
         return true
     }
 
@@ -593,18 +593,18 @@ function validateCardForm() {
     var answer = $("#cardanswer").val().length;
 
     if (question < 3 || answer < 3) {
-        $(".notValidated-Feedback").show();
+
         if (question < 3) {
-            $("#cardquestion").removeClass("valid").addClass("invalid");
+            $("#cardquestion").removeClass("valid").addClass("invalid").val('').attr("placeholder", "min. 3 Zeichen");
         } else {
-            $("#cardquestion").removeClass("invalid").addClass("valid");
+            $("#cardquestion").removeClass("invalid").addClass("valid").attr("placeholder", "grün");
 
 
         }
         if (answer < 3) {
-            $("#cardanswer").removeClass("valid").addClass("invalid");
+            $("#cardanswer").removeClass("valid").addClass("invalid").val('').attr("placeholder", "min. 3 Zeichen");
         } else {
-            $("#cardanswer").removeClass("invalid").addClass("valid");
+            $("#cardanswer").removeClass("invalid").addClass("valid").attr("placeholder", "green");
         }
         return false;
     } else {
