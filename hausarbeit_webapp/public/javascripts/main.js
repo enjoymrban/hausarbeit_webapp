@@ -317,45 +317,46 @@ function createEditBoxPage(context, id) {
 
                     $.each(jsonCard, function (key, value) {
 
-                            //Add card if it matches the Box Id
-                            if(value.box.id == id) {
-                                var card = $('<div class="col-xl-4 col-md-6   align-items-stretch ">' +
-                                    '<div class="card ">' +
-                                    '<img class="card-img-top" src="/assets//images/card.png" alt="Karteikarte">' +
-                                    '<div class="card-img-overlay">' +
-                                    '<div class="custom-card-header">' +
-                                    '<select class="form-control" id="selectcategory' + value.id + '" size="1"></select>' +
-                                    '<img id="deleteCard\' + value.id + \'" class="deleteCross" src="/assets//images/icons/delete_cross.png">' +
-                                    '</div>' +
-                                    '<div class="card-body">' +
-                                    '<form><div class="form-group">' +
-                                    '<input id="updatequestion' + value.id + '" class="card-question form-control" value="' + value.question + '" placeholder="Frage"></div>' +
-                                    '<div class="form-group">' +
-                                    '<input id="updateanswer' + value.id + '" class="card-answer form-control" value="' + value.answer + '" placeholder="Antwort"></div>' +
-                                    '<button id="updatecardbutton' + value.id + '" type="submit" class="btn btn-primary">Aktualisieren</button>' +
-                                    '</form></div></div>')
+                        //Add card if it matches the Box Id
+                        if (value.box.id == id) {
+                            var card = $('<div class="col-xl-4 col-md-6   align-items-stretch ">' +
+                                '<div class="card ">' +
+                                '<img class="card-img-top" src="/assets//images/card.png" alt="Karteikarte">' +
+                                '<div class="card-img-overlay">' +
+                                '<div class="custom-card-header">' +
+                                '<select class="form-control" id="selectcategory' + value.id + '" size="1"></select>' +
+                                '<img id="deleteCard\' + value.id + \'" class="deleteCross" src="/assets//images/icons/delete_cross.png">' +
+                                '</div>' +
+                                '<div class="card-body">' +
+                                '<form id="updateCardForm'+value.id+'"><div class="form-group">' +
+                                '<input id="updatequestion' + value.id + '" class="card-question form-control" value="' + value.question + '" placeholder="Frage"></div>' +
+                                '<div class="form-group">' +
+                                '<input id="updateanswer' + value.id + '" class="card-answer form-control" value="' + value.answer + '" placeholder="Antwort"></div>' +
+                                '<button id="updatecardbutton' + value.id + '" type="submit" class="btn btn-primary">Aktualisieren</button>' +
+                                '<div ><p class="notValidated-Feedback">Alle Felder müssen min. 3 Zeichen enthalten!</p></div>' +
+                                '</form></div></div>')
 
-                                $(".cards").append(card);
+                            $(".cards").append(card);
 
-                                //Add Category selection
-                                $.each(jsonCat, function (key, cat) {
+                            //Add Category selection
+                            $.each(jsonCat, function (key, cat) {
 
-                                    var catList = $('<option value="' + cat.id + '">' + cat.title + '</option>')
-                                    $("#selectcategory" + value.id).append(catList);
-                                    if (cat.id == value.category.id) {
-                                        document.getElementById("selectcategory" +value.id).selectedIndex = cat.id-1;
-                                    }
-                                });
+                                var catList = $('<option value="' + cat.id + '">' + cat.title + '</option>')
+                                $("#selectcategory" + value.id).append(catList);
+                                if (cat.id == value.category.id) {
+                                    document.getElementById("selectcategory" + value.id).selectedIndex = cat.id - 1;
+                                }
+                            });
 
 
-                                $("#deleteCard" + value.id).click(function () {
-                                    deleteCard(value.id);
-                                });
+                            $("#deleteCard" + value.id).click(function () {
+                                deleteCard(value.id);
+                            });
 
-                                $("#updatecardbutton" + value.id).click(function () {
-                                    updateCard(value.id);
-                                });
-                            }
+                            $("#updatecardbutton" + value.id).click(function () {
+                                updateCard(value.id);
+                            });
+                        }
                     });
 
 
@@ -386,51 +387,81 @@ function deleteCard(cardId) {
 
 
 function updateCard(cardId) {
-
-    var url = '/api/card/'+cardId;
-    $.ajax({
-        url: url,
-        type: "GET",
-        dataType: "json"
-    }).done(function (json) {
-        var question = $("#updatequestion" + cardId).val();
-        var answer = $("#updateanswer" + cardId).val();
-        var option = $("#selectcategory" + cardId).val();
-        var postJson = {
-            question: question,
-            answer: answer,
-            nTries: json.nTries,
-            nCorrect: json.nCorrect,
-            category: {
-                id: option
-            },
-            box: {
-                id: json.box.id
-
-            }
-        };
-
+    if (validateUpdateCardForm(cardId)) {
 
         $.ajax({
-
-            type: 'PUT',
             url: '/api/card/' + cardId,
-            data: JSON.stringify(postJson),
-            contentType: "application/json",
-            dataType: 'json',
-            success: function (msg) {
-                //location.reload();
-                //history.go(0);
-                window.location = '#/editbox/' + json.box.id;
+            type: "GET",
+            dataType: "json"
+        }).done(function (json) {
+            var question = $("#updatequestion" + cardId).val();
+            var answer = $("#updateanswer" + cardId).val();
+            var option = $("#selectcategory" + cardId).val();
+            var postJson = {
+                question: question,
+                answer: answer,
+                nTries: json.nTries,
+                nCorrect: json.nCorrect,
+                category: {
+                    id: option
+                },
+                box: {
+                    id: json.box.id
 
-            },
-            error: function (errormessage) {
-                alert("card wasn't updated");
+                }
+            };
 
-            }
+
+            $.ajax({
+
+                type: 'PUT',
+                url: '/api/card/' + cardId,
+                data: JSON.stringify(postJson),
+                contentType: "application/json",
+                dataType: 'json',
+                success: function (msg) {
+                    //location.reload();
+                    //history.go(0);
+                    window.location = '#/editbox/' + json.box.id;
+
+                },
+                error: function (errormessage) {
+                    alert("card wasn't updated");
+
+                }
+            });
+
         });
+    }
+}
 
-    });
+
+function validateUpdateCardForm(cardId) {
+    var question = $("#updatequestion" + cardId).val();
+    var answer = $("#updateanswer" + cardId).val();
+
+
+    if (question < 3 || answer < 3) {
+        $("#updateCardForm" +cardId).find(".notValidated-Feedback").show();
+        if (question < 3) {
+            $("#updatequestion" + cardId).removeClass("valid").addClass("invalid");
+        } else {
+            $("#updatequestion" + cardId).removeClass("invalid").addClass("valid");
+
+
+        }
+        if (answer < 3) {
+            $("#updateanswer" + cardId).removeClass("valid").addClass("invalid");
+        } else {
+            $("#updateanswer" + cardId).removeClass("invalid").addClass("valid");
+        }
+        return false;
+    } else {
+        $("#updatequestion" + cardId).removeClass("invalid").addClass("valid");
+        $("#updateanswer" + cardId).removeClass("invalid").addClass("valid");
+        return true;
+    }
+
 
 }
 
@@ -556,7 +587,6 @@ function createCard(boxId) {
 }
 
 function validateCardForm() {
-
 
 
     var question = $("#cardquestion").val().length;
