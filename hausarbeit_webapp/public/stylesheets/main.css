@@ -1,9 +1,17 @@
+
+@font-face {
+    font-family: Shrikhand-Regular;
+    src:  url('/assets//fonts/Shrikhand-Regular.ttf')  format('truetype');
+}
+
 /*GENERAL*/
 html {
     height: 100%;
 }
 
 body {
+    font-family: Shrikhand-Regular;
+    font-size: 16px;
     height: 100%;
     /*background-image: linear-gradient(to top, #5ee7df 0%, #b490ca 100%);*/
     /*background-repeat: no-repeat;*/
@@ -13,6 +21,7 @@ body {
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-position: -500px -25px;
+
 
 }
 
@@ -147,7 +156,7 @@ div::-webkit-scrollbar-thumb
 }
 
 .card:hover {
-    background-color: lightgray;
+    border-color: lightgrey;
 }
 
 .editbox .card-body{

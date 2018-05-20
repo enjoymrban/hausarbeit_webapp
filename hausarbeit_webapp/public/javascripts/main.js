@@ -329,10 +329,10 @@ function createEditBoxPage(context, id) {
                                 '</div>' +
                                 '<div class="card-body">' +
                                 '<form id="updateCardForm'+value.id+'"><div class="form-group">' +
-                                '<input id="updatequestion' + value.id + '" class="card-question form-control" value="' + value.question + '" placeholder="Frage"></div>' +
+                                '<input id="updatequestion' + value.id + '" maxlength="64" class="card-question form-control" value="' + value.question + '" placeholder="Frage"></div>' +
                                 '<div class="form-group">' +
-                                '<input id="updateanswer' + value.id + '" class="card-answer form-control" value="' + value.answer + '" placeholder="Antwort"></div>' +
-                                '<button id="updatecardbutton' + value.id + '" type="submit" class="btn btn-primary">Aktualisieren</button>' +
+                                '<input id="updateanswer' + value.id + '" maxlength="64" class="card-answer form-control" value="' + value.answer + '" placeholder="Antwort"></div>' +
+                                '<button id="updatecardbutton' + value.id + '" type="submit" class="btn btn-primary">Speichern</button>' +
 
                                 '</form></div></div>');
 

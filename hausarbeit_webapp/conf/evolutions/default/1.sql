@@ -57,7 +57,7 @@ INSERT INTO card (question, answer, nTries, nCorrect, category_id, box_id) VALUE
 INSERT INTO card (question, answer, nTries, nCorrect, category_id, box_id) VALUES('debrise','Trümmer',0,0,1,1);
 INSERT INTO card (question, answer, nTries, nCorrect, category_id, box_id) VALUES('fuselage','Rumpf',0,0,1,1);
 INSERT INTO card (question, answer, nTries, nCorrect, category_id, box_id) VALUES('metal fatigue','Metallermüdung',0,0,1,1);
-
+INSERT INTO card (question, answer, nTries, nCorrect, category_id, box_id) VALUES('metal dsafd','dddddd',0,0,1,1);
 
 
 # --- !Downs
