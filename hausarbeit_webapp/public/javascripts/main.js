@@ -666,7 +666,7 @@ function nextQuestion(){
     $('#nextBtn').prop("disabled",true);
 
     $('#question').html(actCard.question); //Set Question
-    $('#answer').html(''); //reset answer
+    $('#answer').val(''); //reset answer
 
 };
 
