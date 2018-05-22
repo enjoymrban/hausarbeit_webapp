@@ -618,8 +618,70 @@ function validateCardForm() {
 
 
 /* STUDY PAGE*/
-function createStudyPage(context, boxid) {
-    alert("studying box:" + boxid);
+
+var actCardNbr;
+var cardArray;
+var actCard;
+
+function createStudyPage(context, id) {
+    actCardNbr =-1;
+    cardArray = new Array();
+    var url = '/api/card';
+    $.ajax({
+        url: url,
+        type: "GET",
+        dataType: "json"
+    }).done(function (json) {
+        context.render('/assets/html/study.html', {})
+            .appendTo(context.$element())
+            .then(function () {
+                $.each(json, function (key, value) {
+                    if (value.box.id == id) {
+                        cardArray.push(value);
+                    };
+                });
+                $('#checkBtn').click(function () {
+                    checkAnswer();
+                });
+                $('#nextBtn').click(function () {
+                    nextQuestion();
+                });
+                nextQuestion();
+            });
+
+    });
+
 }
+
+function nextQuestion(){
+    //Build the new question on screen
+    if(actCardNbr<cardArray.length){
+        actCardNbr++;
+    }else{
+        window.location = '#/score';
+    }
+    actCard = cardArray[actCardNbr];
+    console.log(actCard);
+
+    $('#nextBtn').prop("disabled",true);
+
+    $('#question').html(actCard.question); //Set Question
+    $('#answer').html(''); //reset answer
+
+};
+
+function checkAnswer(){
+    $('#nextBtn').prop("disabled",false);
+    var usrAnswer = $('#answer').val(); //get the user Answer
+    if(actCard.answer == usrAnswer){    //check if answer is right
+        nextQuestion();
+    }else{
+        $('#learnCardBody').html('<img src="/assets//images/wrong.gif">');
+    }
+
+
+    nextQuestion();
+}
+
 
 
