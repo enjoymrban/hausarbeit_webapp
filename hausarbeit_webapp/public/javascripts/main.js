@@ -23,6 +23,11 @@ var app = $.sammy('#app', function () {
         createStudyPage(context, this.params['id']);
     });
 
+    this.get('#/score/:id', function (context) {
+        context.app.swap('');
+        createScorePage(context, this.params['id']);
+    });
+
 
 });
 
