@@ -26,7 +26,7 @@ function createStudyPage(context, id) {
                 $.each(json, function (key, value) {
                     if (value.box.id == id) {
                         cardArray.push(value);
-                    };
+                    }
                 });
                 if(cardArray.length==0){
                     window.location="#/editbox/"+id;

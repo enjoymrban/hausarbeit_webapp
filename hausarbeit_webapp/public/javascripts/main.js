@@ -62,15 +62,15 @@ function createLearnNowPage(context) {
                 /*Creating an empty Box: Link to Create Box Page*/
                 var box = $('<div class="col-xl-3 col-md-4 col-sm-6   ">' +
                     '<div id="boxIMG0" class="card align-items-center ">' +
-                    '<img id="addNewBox" class="card-img-top" src="/assets//images/box_closed_add.png" alt="Karteikarte">' +
+                    '<img id="addNewBox" class="card-img-top" src="/assets//images/box/box_closed_add.png" alt="neuer Karteikasten erstellen">' +
                     '<div class="card-img-overlay"><a href="#/createbox">' +
                     '<div class="card-body card-body-box"></div></a></div></div></div>')
                 $(".box").append(box);
 
                 $("#boxIMG0").hover(function () {
-                    $("#addNewBox").attr("src", "/assets//images/box_open_add.png");
+                    $("#addNewBox").attr("src", "/assets//images/box/box_open_add.png");
                 }, function () {
-                    $("#addNewBox").attr("src", "/assets//images/box_closed_add.png");
+                    $("#addNewBox").attr("src", "/assets//images/box/box_closed_add.png");
                 });
 
                 /*Listing all the existing Boxes, newest First*/
@@ -78,7 +78,7 @@ function createLearnNowPage(context) {
 
                     var box = $('<div class="col-xl-3 col-md-4 col-sm-6   ">' +
                         '<div id="boxIMG' + value.id + '" class="card">' +
-                        '<img id="boxchangestate' + value.id + '" class="card-img-top boxOpen" src="/assets//images/box_closed_' + value.color + '.png" alt="Karteikarte">' +
+                        '<img id="boxchangestate' + value.id + '" class="card-img-top boxOpen" src="/assets//images/box/box_closed_' + value.color + '.png" alt="Karteikasten: '+value.title+'">' +
                         '<div class="card-img-overlay">' +
                         '<a class="disablelinkcss" href="#/studying/' + value.id + '">' +
                         '<div  class="card-body">' +
@@ -86,16 +86,16 @@ function createLearnNowPage(context) {
                         '<p id="test1" class="card-text">' + value.description + '</p></div></a>' +
                         '<div class="custom-card-footer">' +
                         '<a href="#/editbox/' + value.id + ' ">' +
-                        '<img  id="edit' + value.id + '" class="settingsWheel" src="/assets//images/icons/settings.svg" alt="editBox"  width="20" height="20" /></a>' +
+                        '<img  id="edit' + value.id + '" class="settingsWheel" src="/assets//images/icons/settings.svg" alt="Karteikasten: '+value.title+' bearbeiten"  width="20" height="20" /></a>' +
                         '<a href="#/score/' + value.id + ' ">' +
-                        '<img  id="score' + value.id + '" class="scoreImg" src="/assets//images/icons/statistic.png" alt="score"  width="20" height="20" /></a>' +
-                        '<img id="deleteBox' + value.id + '" data-toggle="confirmation" class="deleteBoxIcon" src="/assets//images/icons/delete.svg" alt="deleteBox"  width="20" height="20" /></div></div></div>')
+                        '<img  id="score' + value.id + '" class="scoreImg" src="/assets//images/icons/statistic.png" alt="Auswertung des Karteikastens: '+value.title+' anzeigen" width="20" height="20" /></a>' +
+                        '<img id="deleteBox' + value.id + '" data-toggle="confirmation" class="deleteBoxIcon" src="/assets//images/icons/delete.svg" alt="Karteikasten: '+value.title+' löschen"  width="20" height="20" /></div></div></div>')
                     $(".box").append(box);
 
                     $("#boxIMG" + value.id).hover(function () {
-                        $("#boxchangestate" + value.id).attr("src", "/assets//images/box_open_" + value.color + ".png");
+                        $("#boxchangestate" + value.id).attr("src", "/assets//images/box/box_open_" + value.color + ".png");
                     }, function () {
-                        $("#boxchangestate" + value.id).attr("src", "/assets//images/box_closed_" + value.color + ".png");
+                        $("#boxchangestate" + value.id).attr("src", "/assets//images/box/box_closed_" + value.color + ".png");
                     });
 
                     $("#deleteBox" + value.id).click(function () {
@@ -254,10 +254,10 @@ function createEditBoxPage(context, id) {
                     // Add empty card
                     var createCard = $('<div class="col-xl-4 col-md-6  align-items-stretch ">' +
                         '<div class="card align-items-center ">' +
-                        '<img class="card-img-top" src="/assets//images/card.png" alt="Karteikarte">' +
+                        '<img class="card-img-top" src="/assets//images/card/card.png" alt="Karteikarte">' +
                         '<div class="card-img-overlay"><a href="#/createcard/' + id + '">' +
                         '<div class="card-body ">' +
-                        '<img src="/assets//images/icons/add.svg" alt="addCard"  width="80" height="80" >' +
+                        '<img src="/assets//images/icons/add.svg" alt="Karte zu Karteikasten hinzufügen"  width="80" height="80" >' +
                         '</div></a></a></div></div>')
                     $(".cards").append(createCard);
 
@@ -267,11 +267,11 @@ function createEditBoxPage(context, id) {
                         if (value.box.id == id) {
                             var card = $('<div class="col-xl-4 col-md-6   align-items-stretch ">' +
                                 '<div class="card ">' +
-                                '<img class="card-img-top" src="/assets//images/card.png" alt="Karteikarte">' +
+                                '<img class="card-img-top" src="/assets//images/card/card.png" alt="Karteikarte">' +
                                 '<div class="card-img-overlay">' +
                                 '<div class="custom-card-header">' +
                                 '<select class="form-control" id="selectcategory' + value.id + '" size="1"></select>' +
-                                '<img id="deleteCard' + value.id + '" class="deleteCross" src="/assets//images/icons/delete_cross.png">' +
+                                '<img id="deleteCard' + value.id + '" class="deleteCross" src="/assets//images/icons/delete_cross.png" alt="löschen">' +
                                 '</div>' +
                                 '<div class="card-body">' +
                                 '<form id="updateCardForm' + value.id + '"><div class="form-group">' +
