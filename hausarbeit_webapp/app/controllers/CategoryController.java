@@ -28,7 +28,7 @@ public class CategoryController extends Controller {
     }
 
 
-    public CompletionStage<Result> category(String q) {
+    public CompletionStage<Result> category() {
         return categoryService.get().thenApplyAsync(personStream -> {
             return ok(Json.toJson(personStream.collect(Collectors.toList())));
         }, ec.current());

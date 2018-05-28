@@ -28,7 +28,7 @@ public class BoxController extends Controller {
     }
 
 
-    public CompletionStage<Result> box(String q) {
+    public CompletionStage<Result> box() {
         return boxService.get().thenApplyAsync(personStream -> {
             return ok(Json.toJson(personStream.collect(Collectors.toList())));
         }, ec.current());

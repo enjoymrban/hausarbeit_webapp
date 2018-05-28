@@ -50,7 +50,8 @@ function nextQuestion(){
         console.log(actCard);
         $('#questNbr').html("Frage "+(actCardNbr+1)+" von "+cardArray.length+":"); //Set: Frage X von XX:
         $('#question').html(actCard.question); //Set Question
-        $('#answer').val(''); //reset answer
+        $('#answer').val('').focus(); //reset answer
+
     }else{
         console.log("No more cards, send you to score page");
         window.location = '#/score/'+actCard.box.id;
