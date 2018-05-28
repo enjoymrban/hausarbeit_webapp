@@ -123,6 +123,8 @@ function createLearnNowPage(context) {
                         '<div class="custom-card-footer">' +
                         '<a href="#/editbox/' + value.id + ' ">' +
                         '<img  id="edit' + value.id + '" class="settingsWheel" src="/assets//images/icons/settings.svg" alt="editBox"  width="20" height="20" /></a>' +
+                        '<a href="#/score/' + value.id + ' ">' +
+                        '<img  id="score' + value.id + '" class="scoreImg" src="/assets//images/icons/statistic.png" alt="score"  width="20" height="20" /></a>' +
                         '<img id="deleteBox' + value.id + '" data-toggle="confirmation" class="deleteBoxIcon" src="/assets//images/icons/delete.svg" alt="deleteBox"  width="20" height="20" /></div></div></div>')
                     $(".box").append(box);
 

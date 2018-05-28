@@ -1,18 +1,46 @@
-<section class="study">
+<section class="score">
     <!--<h1>Auswertung</h1>-->
 
-    <div class="container-fluid">
-        <h1>Auswertung</h1>
-        <div class="row">
-            <div class="col-sm-6" style="background-color:yellow;">
-                <h3>Richtig beamtwortet:</h3>
-                <h3 class="rightAnswered">1</h3>
+    <div id="scorepagetotal">
+        <div class="container-fluid">
+            <h1  id="auswTitle">Auswertung</h1>
+
+            <div>
+                <h2 id="nowSessiondiv">Diese Lernsession</h2>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h3>Richtig beamtwortet:</h3>
+                        <h3 id="rightAnsweredNow">0</h3>
+                    </div>
+                    <div class="col-sm-6">
+                        <h3>Falsch beantwortet:</h3>
+                        <h3 id="wrongAnsweredNow">0</h3>
+                    </div>
+                </div>
+                <div class="progress">
+                    <div id="nowProgress" class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar"  aria-valuemin="0" aria-valuemax="100" ></div>
+                </div>
             </div>
-            <div class="col-sm-6" style="background-color:pink;">
-                <h3>Falsch beantwortet:</h3>
-                <h3 class="wrongAnswered">1</h3>
+
+            <div>
+                <h2 id="allTimediv">All-Time!</h2>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h3>Richtig beantwortet:</h3>
+                        <h3 id="rightAnsweredAllTime">0</h3>
+                    </div>
+                    <div class="col-sm-6">
+                        <h3>Falsch beantwortet:</h3>
+                        <h3 id="wrongAnsweredAllTime">0</h3>
+                    </div>
+                </div>
+                <div class="progress">
+                    <div id="allTimeProgress" class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar"  aria-valuemin="0" aria-valuemax="100" ></div>
+                </div>
             </div>
+            <button id="againBtn"  type="submit" class="btn btn-primary" >Neuer Versuch</button>
         </div>
+
     </div>
 
 

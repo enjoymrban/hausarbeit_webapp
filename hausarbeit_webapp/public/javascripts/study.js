@@ -4,11 +4,16 @@ var actCardNbr;
 var cardArray;
 var actCard;
 
+var nRight=0;
+var nWrong=0;
+
 var answerWrong = false;
 
 function createStudyPage(context, id) {
     actCardNbr =-1;
     cardArray = new Array();
+    nRight=0;
+    nWrong=0;
     var url = '/api/card';
     $.ajax({
         url: url,
@@ -23,6 +28,10 @@ function createStudyPage(context, id) {
                         cardArray.push(value);
                     };
                 });
+                if(cardArray.length==0){
+                    window.location="#/editbox/"+id;
+                    return;
+                }
                 $('#checkBtn').click(function () {
                     checkAnswer();
                 });
@@ -33,25 +42,20 @@ function createStudyPage(context, id) {
 }
 
 function nextQuestion(){
-
-    console.log("Array lenght: "+cardArray.length);
-
-
     //Build the new question on screen
     if(actCardNbr<cardArray.length-1){
         actCardNbr++;
         console.log("Actual Card: "+actCardNbr);
+        actCard = cardArray[actCardNbr];
+        console.log(actCard);
+        $('#questNbr').html("Frage "+(actCardNbr+1)+" von "+cardArray.length+":"); //Set: Frage X von XX:
+        $('#question').html(actCard.question); //Set Question
+        $('#answer').val(''); //reset answer
     }else{
         console.log("No more cards, send you to score page");
         window.location = '#/score/'+actCard.box.id;
         return;
     }
-    actCard = cardArray[actCardNbr];
-    console.log(actCard);
-
-    $('#question').html(actCard.question); //Set Question
-    $('#answer').val(''); //reset answer
-
 };
 
 function checkAnswer(){
@@ -64,15 +68,18 @@ function checkAnswer(){
         nextQuestion();
     }else {
         if (actCard.answer == usrAnswer) {    //check if answer is right
+            nRight++;
+            setQuestionRight(true);
             $("#answer").addClass("valid");
             $("#answer").prop('disabled', true);
-            setTimeout(function () {                //green user feedback for 1.7s, then next question
+            setTimeout(function () {                //green user feedback for 1.5s, then next question
                 $("#answer").removeClass("valid");
                 $("#answer").prop('disabled', false);
                 nextQuestion();
-            }, 1700);
-
+            }, 1500);
         } else {
+            nWrong++;
+            setQuestionRight(false);
             $("#answer").addClass("invalid").val('').attr("placeholder", actCard.answer);
             $("#answer").prop('disabled', true);
             $("#checkBtn").html("Nächste Frage");
@@ -81,30 +88,75 @@ function checkAnswer(){
     }
 }
 
+function setQuestionRight(wasRight){    //wasRight is boolean: true->right, false->wrong
+
+    if(wasRight) {
+        actCard.nTries++;
+        actCard.nCorrect++;
+    }else{
+        actCard.nTries++;
+    }
+    console.log('Updatet Card: ');
+    console.log(actCard);
+
+    //Do the actual PUT to the server
+    $.ajax({
+        type: 'PUT',
+        url: '/api/card/' + actCard.id,
+        data: JSON.stringify(actCard),
+        contentType: "application/json",
+        dataType: 'json',
+        success: function (msg) {
+            console.log('Card updatet with nTries and nCorrect succesfully');
+        },
+        error: function (errormessage) {
+            console.log('Error: Card couldnt be updatet with nTries and nCorrect');
+        }
+    });
+}
+
+
 
 /* SCORE PAGE*/
 function createScorePage(context, id) {
-    actCardNbr =-1;
-    cardArray = new Array();
+    context.render('/assets/html/score.html', {})
+        .appendTo(context.$element())
+        .then(function () {
+            $("#rightAnsweredNow").html(nRight);
+            $("#wrongAnsweredNow").html(nWrong);
+            $("#wrongAnsweredNow").html(nWrong);
+            var percent = parseInt(100/(nRight+nWrong)*nRight); //calculates percent wright answered
+            $("#nowProgress").css("width", percent+"%").html(percent+"%");
+            countWrightWrongTotal(id);
+            $('#againBtn').click(function () {
+                window.location = '#/studying/'+id;
+                return;
+            });
+        });
+}
+var totalRight;
+var totalWrong;
+
+function countWrightWrongTotal(id){
+    totalRight=0;
+    totalWrong=0;
     var url = '/api/card';
     $.ajax({
         url: url,
         type: "GET",
         dataType: "json"
     }).done(function (json) {
-        context.render('/assets/html/score.html', {})
-            .appendTo(context.$element())
-            .then(function () {
-                $.each(json, function (key, value) {
-                    if (value.box.id == id) {
-                        cardArray.push(value);
-                    };
-                });
-                $('#checkBtn').click(function () {
-                    checkAnswer();
-                });
-                nextQuestion();
-            });
-
+        $.each(json, function (key, value) {
+            if (value.box.id == id) {
+                totalRight+=value.nCorrect;
+                totalWrong+=(value.nTries-value.nCorrect);
+                $("#rightAnsweredAllTime").html(totalRight);
+                $("#wrongAnsweredAllTime").html(totalWrong);
+                $("#wrongAnsweredAllTime").html(totalWrong);
+                var percent = parseInt(100/(totalRight+totalWrong)*totalRight); //calculates percent wright answered
+                $("#allTimeProgress").css("width", percent+"%").html(percent+"%");
+            };
+        });
     });
 }
+
