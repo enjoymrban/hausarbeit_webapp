@@ -386,39 +386,46 @@ function updateCard(cardId) {
 
 /* CREATE CARD PAGE*/
 function createCardPage(context, boxid) {
-
-    var url = '/api/category';
+    var url = '/api/box/'+boxid;
     $.ajax({
         url: url,
         type: "GET",
         dataType: "json"
-    }).done(function (json) {
-        context.render('/assets/html/createcard.html', {})
-            .appendTo(context.$element())
-            .then(function () {
-                $.each(json, function (key, category) {
-                    var option = $('<option value="' + category.id + '">' + category.title + '</option>')
-                    $("#selectcategory").append(option);
+    }).done(function (boxJson) {
+        var url = '/api/category';
+        $.ajax({
+            url: url,
+            type: "GET",
+            dataType: "json"
+        }).done(function (json) {
+            context.render('/assets/html/createcard.html', {})
+                .appendTo(context.$element())
+                .then(function () {
+                    $.each(json, function (key, category) {
+                        var option = $('<option value="' + category.id + '">' + category.title + '</option>')
+                        $("#selectcategory").append(option);
 
-                });
-            })
+                    });
+                })
 
-            .then(function () {
-                $('#createcardtitle').html("Karte zu Lernkartei " + boxid + " hinzufügen");
-                $('#createcardbutton').click(function () {
-                    createCard(boxid);
+                .then(function () {
+                    $('#createcardtitle').html("Karte zu Lernkartei: " + boxJson.title + " hinzufügen");
+                    $('#createcardbutton').click(function () {
+                        createCard(boxid);
 
-                });
-                /*The Button that gets triggered by ENTER, not visible in HTML */
-                $('#defaultSubmit').click(function () {
-                    createCard(boxid);
-                });
+                    });
+                    /*The Button that gets triggered by ENTER, not visible in HTML */
+                    $('#defaultSubmit').click(function () {
+                        createCard(boxid);
+                    });
 
-                $('#addcategorybutton').click(function () {
-                    createCategory(boxid);
-                });
+                    $('#addcategorybutton').click(function () {
+                        createCategory(boxid);
+                    });
 
-            })
+                })
+
+        });
 
     });
 
