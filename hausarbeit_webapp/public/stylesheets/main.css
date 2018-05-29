@@ -318,3 +318,21 @@ h1 {
 #allTimeProgress, #nowProgress {
     color: black;
 }
+
+
+/*ABOUT page*/
+#aboutDiv {
+    max-width: 800px;
+}
+
+.about  p {
+    font-size: 20px;
+}
+
+.about h1 {
+    margin-bottom: 50px;
+}
+
+.about a {
+    margin-left: 45%;
+}

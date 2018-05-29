@@ -63,8 +63,7 @@ function checkAnswer(){
     var usrAnswer = $('#answer').val(); //get the user Answer
     if(answerWrong){              //Check if its not the first try, give nxt question
         answerWrong=false;
-        $("#answer").removeClass("invalid").attr("placeholder", "");
-        $("#answer").prop('disabled', false);
+        $("#answer").removeClass("invalid").attr("placeholder", "").prop('disabled', false);
         $("#checkBtn").html("Antwort prüfen");
         nextQuestion();
     }else {
@@ -154,7 +153,6 @@ function countWrightWrongTotal(id){
                 totalWrong+=(value.nTries-value.nCorrect);
                 $("#rightAnsweredAllTime").html(totalRight);
                 $("#wrongAnsweredAllTime").html(totalWrong);
-                $("#wrongAnsweredAllTime").html(totalWrong);
                 var percent = parseInt(100/(totalRight+totalWrong)*totalRight); //calculates percent wright answered
                 $("#allTimeProgress").css("width", percent+"%").html(percent+"%");
                 title= value.box.title;
@@ -164,7 +162,10 @@ function countWrightWrongTotal(id){
     });
 }
 
+
 /* ABOUT PAGE*/
 function createAboutPage(context){
     //Create the page
+    context.render('/assets/html/about.html', {})
+        .appendTo(context.$element())
 }
