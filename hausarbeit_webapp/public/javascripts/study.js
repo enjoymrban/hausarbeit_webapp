@@ -26,7 +26,7 @@ function createStudyPage(context, id) {
                 $.each(json, function (key, value) {
                     if (value.box.id == id) {
                         cardArray.push(value);
-                    };
+                    }
                 });
                 if(cardArray.length==0){
                     window.location="#/editbox/"+id;
@@ -50,7 +50,8 @@ function nextQuestion(){
         console.log(actCard);
         $('#questNbr').html("Frage "+(actCardNbr+1)+" von "+cardArray.length+":"); //Set: Frage X von XX:
         $('#question').html(actCard.question); //Set Question
-        $('#answer').val(''); //reset answer
+        $('#answer').val('').focus(); //reset answer
+
     }else{
         console.log("No more cards, send you to score page");
         window.location = '#/score/'+actCard.box.id;

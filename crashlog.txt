@@ -1,0 +1,27 @@
+C:\Users\Silvan Knecht\Documents\GitHub\hausarbeit_webapp\hausarbeit_webapp>heroku logs -a jklernapp
+2018-05-28T15:24:40.896210+00:00 app[api]: Release v1 created by user knecht.silvan@gmail.com
+2018-05-28T15:24:40.896210+00:00 app[api]: Initial release by user knecht.silvan@gmail.com
+2018-05-28T15:24:41.205885+00:00 app[api]: Enable Logplex by user knecht.silvan@gmail.com
+2018-05-28T15:24:41.205885+00:00 app[api]: Release v2 created by user knecht.silvan@gmail.com
+2018-05-28T15:36:08.000000+00:00 app[api]: Build started by user knecht.silvan@gmail.com
+2018-05-28T15:36:24.761847+00:00 app[api]: Deploy 775aaf6a by user knecht.silvan@gmail.com
+2018-05-28T15:36:24.761847+00:00 app[api]: Release v3 created by user knecht.silvan@gmail.com
+2018-05-28T15:36:24.779240+00:00 app[api]: Scaled to web@1:Free by user knecht.silvan@gmail.com
+2018-05-28T15:36:25.000000+00:00 app[api]: Build succeeded
+2018-05-28T15:36:31.807701+00:00 heroku[web.1]: Starting process with command `target/universal/stage/bin/hausarbeit_webapp -Dhttp.port=${PORT} -`
+2018-05-28T15:36:34.101166+00:00 app[web.1]: Setting JAVA_TOOL_OPTIONS defaults based on dyno size. Custom settings will override them.
+2018-05-28T15:36:34.327783+00:00 app[web.1]: Picked up JAVA_TOOL_OPTIONS: -Xmx300m -Xss512k -Dfile.encoding=UTF-8
+2018-05-28T15:36:37.556645+00:00 app[web.1]: Bad root server path: /app/target/universal/stage/-
+2018-05-28T15:36:37.686663+00:00 heroku[web.1]: Process exited with status 255
+2018-05-28T15:36:37.715323+00:00 heroku[web.1]: State changed from starting to crashed
+2018-05-28T15:36:37.718063+00:00 heroku[web.1]: State changed from crashed to starting
+2018-05-28T15:36:42.715648+00:00 heroku[web.1]: Starting process with command `target/universal/stage/bin/hausarbeit_webapp -Dhttp.port=${PORT} -`
+2018-05-28T15:36:44.627506+00:00 app[web.1]: Setting JAVA_TOOL_OPTIONS defaults based on dyno size. Custom settings will override them.
+2018-05-28T15:36:44.782802+00:00 app[web.1]: Picked up JAVA_TOOL_OPTIONS: -Xmx300m -Xss512k -Dfile.encoding=UTF-8
+2018-05-28T15:36:46.243242+00:00 app[web.1]: Bad root server path: /app/target/universal/stage/-
+2018-05-28T15:36:46.395418+00:00 heroku[web.1]: State changed from starting to crashed
+2018-05-28T15:36:46.338282+00:00 heroku[web.1]: Process exited with status 255
+2018-05-28T15:37:44.644061+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/" host=jklernapp.herokuapp.com request_id=5d075192-4e47-4c8f-be31-1ddfa56a750a fwd="213.196.156.152" dyno= connect= service= status=503 bytes= protocol=https
+2018-05-28T15:37:45.103521+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/favicon.ico" host=jklernapp.herokuapp.com request_id=b03190a4-e75b-49fa-bffe-6e1330a78a70 fwd="213.196.156.152" dyno= connect= service= status=503 bytes= protocol=https
+
+C:\Users\Silvan Knecht\Documents\GitHub\hausarbeit_webapp\hausarbeit_webapp>

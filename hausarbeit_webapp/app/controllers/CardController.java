@@ -25,7 +25,7 @@ public class CardController extends Controller {
     }
 
 
-    public CompletionStage<Result> card(String q) {
+    public CompletionStage<Result> card() {
         return cardService.get().thenApplyAsync(personStream -> {
             return ok(Json.toJson(personStream.collect(Collectors.toList())));
         }, ec.current());
