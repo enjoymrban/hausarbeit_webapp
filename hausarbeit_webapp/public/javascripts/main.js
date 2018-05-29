@@ -37,6 +37,12 @@ var app = $.sammy('#app', function () {
         createScorePage(context, this.params['id']);
     });
 
+    /*On this page the user can check his score*/
+    this.get('#/about/', function (context) {
+        context.app.swap('');
+        createAboutPage(context);
+    });
+
 
 });
 

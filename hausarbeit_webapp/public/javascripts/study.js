@@ -164,3 +164,7 @@ function countWrightWrongTotal(id){
     });
 }
 
+/* ABOUT PAGE*/
+function createAboutPage(context){
+    //Create the page
+}
