@@ -136,6 +136,7 @@ function createScorePage(context, id) {
 }
 var totalRight;
 var totalWrong;
+var title;
 
 function countWrightWrongTotal(id){
     totalRight=0;
@@ -155,7 +156,9 @@ function countWrightWrongTotal(id){
                 $("#wrongAnsweredAllTime").html(totalWrong);
                 var percent = parseInt(100/(totalRight+totalWrong)*totalRight); //calculates percent wright answered
                 $("#allTimeProgress").css("width", percent+"%").html(percent+"%");
+                title= value.box.title;
             };
+            $("#auswTitle").html("Auswertung "+title); //sets title on score page
         });
     });
 }
