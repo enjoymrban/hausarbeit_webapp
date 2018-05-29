@@ -71,18 +71,15 @@ function checkAnswer(){
         if (actCard.answer == usrAnswer) {    //check if answer is right
             nRight++;
             setQuestionRight(true);
-            $("#answer").addClass("valid");
-            $("#answer").prop('disabled', true);
+            $("#answer").addClass("valid").prop('disabled', true);
             setTimeout(function () {                //green user feedback for 1.5s, then next question
-                $("#answer").removeClass("valid");
-                $("#answer").prop('disabled', false);
+                $("#answer").removeClass("valid").prop('disabled', false);
                 nextQuestion();
             }, 1500);
         } else {
             nWrong++;
             setQuestionRight(false);
-            $("#answer").addClass("invalid").val('').attr("placeholder", actCard.answer);
-            $("#answer").prop('disabled', true);
+            $("#answer").addClass("invalid").val('').attr("placeholder", actCard.answer).prop('disabled', true);
             $("#checkBtn").html("Nächste Frage");
             answerWrong = true;
         }
@@ -125,7 +122,6 @@ function createScorePage(context, id) {
         .then(function () {
             $("#rightAnsweredNow").html(nRight);
             $("#wrongAnsweredNow").html(nWrong);
-            $("#wrongAnsweredNow").html(nWrong);
             var percent = parseInt(100/(nRight+nWrong)*nRight); //calculates percent wright answered
             $("#nowProgress").css("width", percent+"%").html(percent+"%");
             countWrightWrongTotal(id);
@@ -133,9 +129,8 @@ function createScorePage(context, id) {
                 window.location = '#/studying/'+id;
                 return;
             });
-
-            if(actCardNbr==null){
-                //diese lernsession deaktivieren
+            //deactivate div "Diese Lernsession" if not learned in this session or its the wrong box
+            if(actCardNbr==null || actCard.box.id != id){
                 $('#thisSession').hide();
             }
         });
