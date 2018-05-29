@@ -1,6 +1,6 @@
 /* STUDY PAGE*/
 
-var actCardNbr;
+var actCardNbr = null;
 var cardArray;
 var actCard;
 
@@ -133,6 +133,11 @@ function createScorePage(context, id) {
                 window.location = '#/studying/'+id;
                 return;
             });
+
+            if(actCardNbr==null){
+                //diese lernsession deaktivieren
+                $('#thisSession').hide();
+            }
         });
 }
 var totalRight;

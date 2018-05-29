@@ -185,7 +185,7 @@ div::-webkit-scrollbar-thumb
 
 /*Create Card Page*/
 .createcard {
-    min-height:500px;
+    min-height:550px;
 }
 
 #defaultSubmit{
@@ -287,7 +287,7 @@ h1 {
     border-style: solid;
     border-width: thick;
     border-color: black;
-    height: 30px;
+    height: 35px;
 }
 
 #againBtn {
@@ -300,4 +300,20 @@ h1 {
 
 #nowSessiondiv {
     margin-top: 20px;
+}
+
+.rightText {
+    color: green;
+}
+
+.wrongText {
+    color: red;
+}
+
+#auswTitle {
+    margin-bottom: 55px;
+}
+
+#allTimeProgress, #nowProgress {
+    color: black;
 }
