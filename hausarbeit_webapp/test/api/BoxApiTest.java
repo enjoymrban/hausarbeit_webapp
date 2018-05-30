@@ -1,6 +1,7 @@
-package controllers;
+package api;
 
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.json.JSONObject;
 import org.junit.Test;
 
 import java.io.BufferedReader;
@@ -9,33 +10,35 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 
-import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.entity.ContentType;
 
 import static org.junit.Assert.assertEquals;
 
 
-public class BoxControllerTest {
-
+public class BoxApiTest {
 
 
     @Test
     public void testPOSTBox() {
         try {
-            String postUrl = "http://localhost:9000/api/box";// put in your url
+
+            String payload = "{\"title\":\"testTitle\",\"description\":\"John\",\"color\":\"green\"}";
+            StringEntity entity = new StringEntity(payload,
+                    ContentType.APPLICATION_FORM_URLENCODED);
 
             HttpClient httpClient = HttpClientBuilder.create().build();
-            HttpPost post = new HttpPost(postUrl);
-            StringEntity postingString = new StringEntity("{\"title\"=\"testBoxTitle\",\"description\"=\"testBoxDescription\"}");//gson.tojson() converts your pojo to json
-            post.setEntity(postingString);
-            post.setHeader("Content-type", "application/json");
-            HttpResponse response = httpClient.execute(post);
+            HttpPost request = new HttpPost("http://localhost:9000/api/box");
+            request.setEntity(entity);
+            request.setHeader("Content-type", "application/json");
 
-            System.out.println(response);
+            HttpResponse response = httpClient.execute(request);
+            assertEquals(200, response.getStatusLine().getStatusCode());
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -49,19 +52,24 @@ public class BoxControllerTest {
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("GET");
 
-//            Response code
+            // Response code
             int responseCode = con.getResponseCode();
+
+
+            // The JSON response
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(con.getInputStream())
             );
 
-//           The JSON response
+
             String inputLine;
             StringBuffer response = new StringBuffer();
             while ((inputLine = in.readLine()) != null) {
                 response.append(inputLine);
             }
             in.close();
+
+            // Test if responseCode equals 200
             assertEquals(200, responseCode);
 
 
@@ -81,22 +89,30 @@ public class BoxControllerTest {
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("GET");
 
-//            Response code
+            // Response code
             int responseCode = con.getResponseCode();
+
+
+            //The JSON response
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(con.getInputStream())
             );
 
-//           The JSON response
             String inputLine;
-            StringBuffer responseJson = new StringBuffer();
+            StringBuffer response = new StringBuffer();
             while ((inputLine = in.readLine()) != null) {
-                responseJson.append(inputLine);
+                response.append(inputLine);
             }
             in.close();
 
-//            Test if @responseCode equals 200
+            // Test if responseCode equals 200
             assertEquals(200, responseCode);
+
+
+            // Test if title equal Geografie
+            String responseJsonString = response.toString();
+            JSONObject jsonObj = new JSONObject(responseJsonString);
+            assertEquals("Geografie", jsonObj.getString("title"));
 
 
         } catch (Exception e) {
@@ -106,6 +122,9 @@ public class BoxControllerTest {
 
     }
 
+
 }
+
+
 
 
