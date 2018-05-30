@@ -1,5 +1,10 @@
 package api;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -10,28 +15,22 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.entity.ContentType;
-
 import static org.junit.Assert.assertEquals;
 
 
-public class BoxApiTest {
+public class CardApiTest {
 
 
     @Test
-    public void testPOSTBox() {
+    public void testPOSTCard() {
         try {
 
-            String payload = "{\"title\":\"testTitle\",\"description\":\"John\",\"color\":\"green\"}";
+            String payload = "{\"question\":\"TestQuestion\",\"answer\":\"TestAnswer\",\"nTries\":\"10\",\"nCorrect\":\"5\",\"category\":{\"id\":\"1\"},\"box\":{\"id\":\"1\"}}";
             StringEntity entity = new StringEntity(payload,
                     ContentType.APPLICATION_FORM_URLENCODED);
 
             HttpClient httpClient = HttpClientBuilder.create().build();
-            HttpPost request = new HttpPost("http://localhost:9000/api/box");
+            HttpPost request = new HttpPost("http://localhost:9000/api/card");
             request.setEntity(entity);
             request.setHeader("Content-type", "application/json");
 
@@ -46,9 +45,9 @@ public class BoxApiTest {
 
 
     @Test
-    public void testGETAllBoxes() {
+    public void testGETAllCards() {
         try {
-            URL url = new URL("http://localhost:9000/api/box");
+            URL url = new URL("http://localhost:9000/api/card");
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("GET");
 
@@ -73,16 +72,12 @@ public class BoxApiTest {
             assertEquals(200, responseCode);
 
             // Tests:
-            // Title equals "englisch"
-            // description equals "letzte Prüfung"
-            // color equals "green"
+            // question equals "Brotaufstrich"
+            // answer equals "spread"
             String responseJsonString = response.toString();
             JSONArray jsonarray = new JSONArray(responseJsonString);
-            assertEquals("englisch", jsonarray.getJSONObject(0).getString("title"));
-            assertEquals("letzte Prüfung", jsonarray.getJSONObject(0).getString("description"));
-            assertEquals("green", jsonarray.getJSONObject(0).getString("color"));
-
-
+            assertEquals("Brotaufstrich", jsonarray.getJSONObject(0).getString("question"));
+            assertEquals("spread", jsonarray.getJSONObject(0).getString("answer"));
 
 
         } catch (Exception e) {
@@ -95,9 +90,9 @@ public class BoxApiTest {
 
     @Test
     public void testGETBoxWithId() {
-        int boxid = 2;
+        int cardid = 2;
         try {
-            URL url = new URL("http://localhost:9000/api/box/" + boxid);
+            URL url = new URL("http://localhost:9000/api/card/" + cardid);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("GET");
 
@@ -122,14 +117,12 @@ public class BoxApiTest {
 
 
             // Tests Box with Id 2
-            // Title equals "Geografie"
-            // description equals "Europas Hauptstädte"
-            // color equals "red"
+            // question equals "König"
+            // answer equals "king"
             String responseJsonString = response.toString();
             JSONObject jsonObj = new JSONObject(responseJsonString);
-            assertEquals("Geografie", jsonObj.getString("title"));
-            assertEquals("Europas Hauptstädte", jsonObj.getString("description"));
-            assertEquals("red", jsonObj.getString("color"));
+            assertEquals("König", jsonObj.getString("question"));
+            assertEquals("king", jsonObj.getString("answer"));
 
         } catch (Exception e) {
             e.printStackTrace();

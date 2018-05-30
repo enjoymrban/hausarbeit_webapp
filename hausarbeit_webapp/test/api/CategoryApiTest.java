@@ -1,6 +1,5 @@
 package api;
 
-import models.Category;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
@@ -16,7 +15,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import static org.junit.Assert.assertEquals;
-
 
 
 public class CategoryApiTest {
@@ -52,9 +50,8 @@ public class CategoryApiTest {
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("GET");
 
-           // Response code
+            // Response code
             int responseCode = con.getResponseCode();
-
 
 
             // The JSON response
@@ -73,14 +70,10 @@ public class CategoryApiTest {
             // Test if responseCode equals 200
             assertEquals(200, responseCode);
 
+            // Tests whether the title of the first category is "Englisch"
             String responseJsonString = response.toString();
-            JSONObject jsonObj = new JSONObject(responseJsonString);
-            assertEquals("Geografie", (array.getJsonObject(0)).getString("title"));
-
-
-
-
-
+            JSONArray jsonarray = new JSONArray(responseJsonString);
+            assertEquals("Englisch", jsonarray.getJSONObject(0).getString("title"));
 
 
         } catch (Exception e) {
@@ -90,7 +83,6 @@ public class CategoryApiTest {
 
 
     }
-
 
 
 }
