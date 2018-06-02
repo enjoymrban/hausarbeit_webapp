@@ -92,7 +92,7 @@ function createLearnNowPage(context) {
                         '<p id="test1" class="card-text">' + value.description + '</p></div></a>' +
                         '<div class="custom-card-footer">' +
                         '<a href="#/editbox/' + value.id + ' ">' +
-                        '<img  id="edit' + value.id + '" class="settingsWheel" src="/assets//images/icons/settings.svg" alt="Karteikasten: '+value.title+' bearbeiten"  width="20" height="20" /></a>' +
+                        '<img  id="edit' + value.id + '" class="editBox" src="/assets//images/icons/edit.png" alt="Karteikasten: '+value.title+' bearbeiten"  width="20" height="20" /></a>' +
                         '<a href="#/score/' + value.id + ' ">' +
                         '<img  id="score' + value.id + '" class="scoreImg" src="/assets//images/icons/statistic.png" alt="Auswertung des Karteikastens: '+value.title+' anzeigen" width="20" height="20" /></a>' +
                         '<img id="deleteBox' + value.id + '" data-toggle="confirmation" class="deleteBoxIcon" src="/assets//images/icons/delete.svg" alt="Karteikasten: '+value.title+' löschen"  width="20" height="20" /></div></div></div>')
