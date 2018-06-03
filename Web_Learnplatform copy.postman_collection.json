@@ -1,20 +1,23 @@
 {
 	"info": {
-		"_postman_id": "abe48689-3962-c3f7-0354-0ebf3c93ccc7",
-		"name": "Web_Learnplatform",
+		"_postman_id": "f268517a-5f5f-4e85-bc62-75a01f199676",
+		"name": "Web_Learnplatform copy",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
 			"name": "Box",
-			"description": "",
+			"description": null,
 			"item": [
 				{
 					"name": "http://localhost:9000/api/box/1",
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "http://localhost:9000/api/box/1",
 							"protocol": "http",
@@ -65,7 +68,10 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "http://localhost:9000/api/box",
 							"protocol": "http",
@@ -116,7 +122,10 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "http://localhost:9000/api/box/1",
 							"protocol": "http",
@@ -144,7 +153,10 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "http://localhost:9000/api/card",
 							"protocol": "http",
@@ -172,7 +184,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"question\": \"was ist das?\",\n\t\"answer\": \"nichts\",\n\t\"nTries\": 0,\n\t\"nCorrect\": 0\n\t\n\t\n}"
+							"raw": "{\n\t\"question\": \"was ist das?\",\n\t\"answer\": \"nichts\",\n\t\"nTries\": 0,\n\t\"nCorrect\": 0,\n\t\"category\": {\n\t\t\"id\":1},\n\t\t\n\t\"box\":{\n\t\t\"id\":5}\n\t\n\t\n}"
 						},
 						"url": {
 							"raw": "http://localhost:9000/api/card",
@@ -224,7 +236,10 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "http://localhost:9000/api/card/1",
 							"protocol": "http",
@@ -246,7 +261,10 @@
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "http://localhost:9000/api/card/2",
 							"protocol": "http",
@@ -267,14 +285,17 @@
 		},
 		{
 			"name": "Category",
-			"description": "",
+			"description": null,
 			"item": [
 				{
 					"name": "http://localhost:9000/api/category",
 					"request": {
 						"method": "GET",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "http://localhost:9000/api/category",
 							"protocol": "http",
@@ -324,7 +345,10 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"body": {},
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "http://localhost:9000/api/category/1",
 							"protocol": "http",

@@ -70,7 +70,7 @@ function createLearnNowPage(context) {
                     '<div id="boxIMG0" class="card align-items-center ">' +
                     '<img id="addNewBox" class="card-img-top" src="/assets//images/box/box_closed_add.png" alt="neuer Karteikasten erstellen">' +
                     '<div class="card-img-overlay"><a href="#/createbox">' +
-                    '<div class="card-body card-body-box"></div></a></div></div></div>')
+                    '<div class="card-body card-body-box"></div></a></div></div></div>');
                 $(".box").append(box);
 
                 $("#boxIMG0").hover(function () {
@@ -95,7 +95,7 @@ function createLearnNowPage(context) {
                         '<img  id="edit' + value.id + '" class="editBox" src="/assets//images/icons/edit.png" alt="Karteikasten: '+value.title+' bearbeiten"  width="20" height="20" /></a>' +
                         '<a href="#/score/' + value.id + ' ">' +
                         '<img  id="score' + value.id + '" class="scoreImg" src="/assets//images/icons/statistic.png" alt="Auswertung des Karteikastens: '+value.title+' anzeigen" width="20" height="20" /></a>' +
-                        '<img id="deleteBox' + value.id + '" data-toggle="confirmation" class="deleteBoxIcon" src="/assets//images/icons/delete.svg" alt="Karteikasten: '+value.title+' löschen"  width="20" height="20" /></div></div></div>')
+                        '<img id="deleteBox' + value.id + '" data-toggle="confirmation" class="deleteBoxIcon" src="/assets//images/icons/delete.svg" alt="Karteikasten: '+value.title+' löschen"  width="20" height="20" /></div></div></div>');
                     $(".box").append(box);
 
                     $("#boxIMG" + value.id).hover(function () {
@@ -293,7 +293,7 @@ function createEditBoxPage(context, id) {
                             //Add Category selection
                             $.each(jsonCat, function (key, cat) {
 
-                                var catList = $('<option value="' + cat.id + '">' + cat.title + '</option>')
+                                var catList = $('<option value="' + cat.id + '">' + cat.title + '</option>');
                                 $("#selectcategory" + value.id).append(catList);
                                 if (cat.id == value.category.id) {
                                     document.getElementById("selectcategory" + value.id).selectedIndex = cat.id - 1;
@@ -408,7 +408,7 @@ function createCardPage(context, boxid) {
                 .appendTo(context.$element())
                 .then(function () {
                     $.each(json, function (key, category) {
-                        var option = $('<option value="' + category.id + '">' + category.title + '</option>')
+                        var option = $('<option value="' + category.id + '">' + category.title + '</option>');
                         $("#selectcategory").append(option);
 
                     });
@@ -483,7 +483,7 @@ function createCard(boxId) {
             nTries: 0,
             nCorrect: 0,
             category: {
-                id: categoryId,
+                id: categoryId
             },
             box: {
                 id: boxId
