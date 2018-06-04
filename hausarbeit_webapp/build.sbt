@@ -27,4 +27,4 @@ libraryDependencies ++= Seq(
   "org.webjars" % "material-design-icons" % "3.0.1"
 )
 
-herokuAppName in Compile := "jklernapp"
+herokuAppName in Compile := "jklesrnapp"
