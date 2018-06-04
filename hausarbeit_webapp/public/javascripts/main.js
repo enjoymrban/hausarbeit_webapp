@@ -407,7 +407,7 @@ function createCardPage(context, boxid) {
             context.render('/assets/html/createcard.html', {})
                 .appendTo(context.$element())
                 .then(function () {
-                    $.each(json, function (key, category) {
+                    $.each(json.reverse(), function (key, category) {
                         var option = $('<option value="' + category.id + '">' + category.title + '</option>');
                         $("#selectcategory").append(option);
 
