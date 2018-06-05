@@ -16,10 +16,10 @@ public class BoxTest {
         box.setColor("green");
 
 
-        assertEquals("TestTitleBox", box.getTitle());
+    assertEquals("TestTitleBox", box.getTitle());
         assertEquals("TestDescriptionBox", box.getDescription());
         assertEquals("green", box.getColor());
 
 
-    }
-}
+        }
+        }
