@@ -5,7 +5,7 @@ JKlearnapp is a Webapplication that alows users to create boxes and flashcards t
 
 ## Running the tests
 
-To run the tests an additional Library needs to be imported for IntelliJ IDEA follow these steps:
+To run the tests an additional Library needs to be imported. For IntelliJ IDEA follow these steps:
 File ---> Project Structure ---> Modules ---> Add (green cross) ---> JAR's or directories ---> add this path
 ```
 C:\Users\Silvan Knecht\Documents\GitHub\hausarbeit_webapp\hausarbeit_webapp\javaExternalLibrary\java-json.jar
