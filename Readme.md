@@ -2,6 +2,9 @@
 
 JKlearnapp is a Webapplication that alows users to create boxes and flashcards to learn efficiently
 
+## Deployment
+
+The App is deployed on heroku and can be visited here: www.jklearnapp.herokuapp.com
 
 ## Running the tests
 
