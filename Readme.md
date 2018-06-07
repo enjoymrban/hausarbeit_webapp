@@ -9,9 +9,9 @@ The App is deployed on heroku and can be visited here: https://jklearnapp.heroku
 ## Running the tests
 
 To run the tests an additional Library needs to be imported. For IntelliJ IDEA follow these steps:
-File ---> Project Structure ---> Modules ---> Add (green cross) ---> JAR's or directories ---> add this path
+File ---> Project Structure ---> Modules ---> Add (green cross) ---> JAR's or directories ---> you can find the requested file inside of the hausarbeit_webapp folder.
 ```
-C:\Users\Silvan Knecht\Documents\GitHub\hausarbeit_webapp\hausarbeit_webapp\javaExternalLibrary\java-json.jar
+hausarbeit_webapp\javaExternalLibrary\java-json.jar
 ```
 Then run the tests by right click on tests ---> Run 'All Tests'
 
