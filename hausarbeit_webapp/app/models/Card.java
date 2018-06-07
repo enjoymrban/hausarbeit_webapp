@@ -3,7 +3,7 @@ package models;
 import javax.persistence.*;
 
 
-@Entity(name="card")
+@Entity(name = "card")
 public class Card {
 
     @Id
@@ -18,9 +18,9 @@ public class Card {
     @JoinColumn(name = "category_id")
     private Category category;
 
-   @ManyToOne
-   @JoinColumn(name = "box_id")
-   private Box box;
+    @ManyToOne
+    @JoinColumn(name = "box_id")
+    private Box box;
 
 
     public Long getId() {

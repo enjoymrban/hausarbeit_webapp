@@ -437,7 +437,7 @@ function createCardPage(context, boxid) {
 
 }
 
-/*Function to create a new category */
+/*Function to create a new category requires @BoxID */
 function createCategory(boxId) {
     /*Check whether the form is filled out correctly
     * validateCategoryForm in validation.js*/

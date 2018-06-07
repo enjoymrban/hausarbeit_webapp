@@ -30,6 +30,8 @@ create table card (
 
 );
 
+/*test data*/
+
 INSERT INTO category (title) VALUES ('Englisch');
 
 INSERT INTO box (title, description, color) VALUES ('englisch', 'letzte Prüfung', 'green');

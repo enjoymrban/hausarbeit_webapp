@@ -1,3 +1,5 @@
+ /*This Script contains all kind of necessary validation*/
+
 /*Ensures that the box is empty*/
 function validateBoxDelete(boxId) {
 
